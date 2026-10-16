@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Keyboard, Search, Radio, Monitor, Sliders, Volume2 } from "lucide-react";
+import { Keyboard, Search } from "lucide-react";
 
 interface ShortcutItem {
   keys: string[];
@@ -49,40 +49,41 @@ export function ShortcutsCheatSheet() {
   });
 
   return (
-    <section id="shortcuts" className="py-24 relative bg-[#07090E]">
+    <section id="shortcuts" className="py-24 relative bg-[#0a0a0a]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold uppercase tracking-wider mb-3">
             <Keyboard className="w-3.5 h-3.5 text-amber-400" />
-            <span>Fluid Ergonomics</span>
+            <span>Keyboard-first</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
-            Designed For Keystroke Mastery
+            Control everything from the keyboard
           </h2>
-          <p className="mt-4 text-zinc-300 text-sm sm:text-base">
-            Every major playback, profile, and window state can be controlled through instant hotkeys
-            and system-wide Windows media keys.
+          <p className="mt-4 text-neutral-300 text-sm sm:text-base leading-relaxed">
+            Play, seek, change profiles, and move the window without reaching for the mouse &mdash;
+            plus your Windows media keys control EYTAA even when it&apos;s not focused.
           </p>
         </div>
 
         {/* Filter & Category Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
           <div className="flex flex-wrap items-center gap-2">
             {[
-              { id: "all", label: "All Shortcuts" },
+              { id: "all", label: "All shortcuts" },
               { id: "playback", label: "Playback" },
               { id: "audio", label: "Audio & EQ" },
               { id: "window", label: "Window & PiP" },
-              { id: "system", label: "System-Wide" },
+              { id: "system", label: "System-wide" },
             ].map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
+                aria-pressed={selectedCategory === cat.id}
                 className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                   selectedCategory === cat.id
                     ? "bg-amber-400 text-black shadow-md shadow-amber-500/20"
-                    : "bg-white/5 hover:bg-white/10 text-zinc-300 border border-white/5"
+                    : "bg-white/5 hover:bg-white/10 text-neutral-300 border border-white/5"
                 }`}
               >
                 {cat.label}
@@ -92,15 +93,22 @@ export function ShortcutsCheatSheet() {
 
           {/* Search Box */}
           <div className="relative w-full sm:w-64">
-            <Search className="w-4 h-4 text-zinc-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-neutral-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Search shortcuts..."
               value={filterQuery}
               onChange={(e) => setFilterQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 rounded-xl bg-white/5 border border-white/10 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400/50"
+              aria-label="Search keyboard shortcuts"
+              className="w-full pl-9 pr-4 py-2 rounded-xl bg-white/5 border border-white/10 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-amber-400/50"
             />
           </div>
+        </div>
+
+        {/* Result count */}
+        <div className="mb-4 text-xs text-neutral-500" role="status" aria-live="polite">
+          Showing <span className="text-neutral-300 font-semibold">{filteredShortcuts.length}</span> of{" "}
+          {SHORTCUTS.length} shortcuts
         </div>
 
         {/* Shortcuts Table / Card List */}
@@ -110,7 +118,7 @@ export function ShortcutsCheatSheet() {
             return (
               <div
                 key={index}
-                className="glass-panel p-4 rounded-xl border-white/5 hover:border-amber-500/30 flex items-center justify-between gap-4 transition-colors"
+                className="surface p-4 rounded-xl border-white/5 hover:border-amber-500/30 flex items-center justify-between gap-4 transition-colors"
               >
                 <div className="flex-1">
                   <div className="text-sm font-semibold text-white">{item.action}</div>
@@ -118,13 +126,13 @@ export function ShortcutsCheatSheet() {
                     <span
                       className={`text-[10px] font-mono uppercase px-2 py-0.5 rounded-full ${
                         isSystemWide
-                          ? "bg-cyan-500/15 text-cyan-300 border border-cyan-500/30"
-                          : "bg-white/5 text-zinc-400"
+                          ? "bg-white/10 text-neutral-300 border border-white/10"
+                          : "bg-white/5 text-neutral-400"
                       }`}
                     >
                       {item.scope}
                     </span>
-                    <span className="text-[10px] text-zinc-500 capitalize">{item.category}</span>
+                    <span className="text-[10px] text-neutral-500 capitalize">{item.category}</span>
                   </div>
                 </div>
 
@@ -141,7 +149,7 @@ export function ShortcutsCheatSheet() {
         </div>
 
         {filteredShortcuts.length === 0 && (
-          <div className="text-center py-12 glass-panel rounded-2xl text-zinc-400 text-sm">
+          <div className="text-center py-12 surface rounded-2xl text-neutral-400 text-sm">
             No keyboard shortcuts found matching &ldquo;{filterQuery}&rdquo;.
           </div>
         )}

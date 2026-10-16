@@ -1,15 +1,15 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Download, Menu, X, Sparkles, BookOpen, Layers } from "lucide-react";
+import { Download, Menu, X, BookOpen } from "lucide-react";
 import { GithubIcon } from "@/components/GithubIcon";
 
 const NAV_ITEMS = [
-  { id: "interactive-demo", label: "Interactive Demo", href: "/#interactive-demo" },
-  { id: "architecture", label: "Architecture", href: "/#architecture" },
+  { id: "interactive-demo", label: "Live Demo", href: "/#interactive-demo" },
+  { id: "architecture", label: "Why EYTAA", href: "/#architecture" },
   { id: "features", label: "Features", href: "/#features" },
   { id: "shortcuts", label: "Shortcuts", href: "/#shortcuts" },
   { id: "changelog", label: "Changelog", href: "/#changelog" },
@@ -18,14 +18,20 @@ const NAV_ITEMS = [
 export function Navbar() {
   const pathname = usePathname();
   const isDocsPage = pathname.startsWith("/docs");
+  const headerRef = useRef<HTMLElement | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [headerHeight, setHeaderHeight] = useState(72);
 
   // ScrollSpy for landing page sections
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+
+      if (headerRef.current) {
+        setHeaderHeight(headerRef.current.offsetHeight);
+      }
 
       if (isDocsPage) {
         setActiveSection("docs");
@@ -49,29 +55,47 @@ export function Navbar() {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, [isDocsPage]);
 
-  // Lock body scroll when mobile menu is open
+  // Lock body scroll + close on Escape when mobile menu is open
   useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
+    if (!mobileMenuOpen) return;
+
+    document.body.style.overflow = "hidden";
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
       document.body.style.overflow = "";
-    }
+      window.removeEventListener("keydown", onKeyDown);
+    };
   }, [mobileMenuOpen]);
 
   return (
     <header
+      ref={headerRef}
       id="site-header"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#070A11]/90 backdrop-blur-2xl border-b border-white/[0.08] shadow-2xl shadow-black/60 py-3"
+          ? "bg-[#0a0a0a]/90 backdrop-blur-xl border-b border-white/[0.08] py-3"
           : "bg-transparent py-4 sm:py-5"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-[60] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-amber-400 focus:text-black focus:text-xs focus:font-bold"
+      >
+        Skip to content
+      </a>
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Brand Logo & Amharic Lens Symbol */}
           <Link
@@ -85,37 +109,38 @@ export function Navbar() {
                 alt="EYTAA Optical Aperture Logo"
                 width={40}
                 height={40}
-                className="w-full h-full object-contain filter drop-shadow-[0_0_12px_rgba(245,158,11,0.5)]"
+                className="w-full h-full object-contain"
                 priority
               />
             </div>
             <div className="flex flex-col">
               <div className="flex items-center gap-2">
-                <span className="text-lg sm:text-xl font-black tracking-tight bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 bg-clip-text text-transparent">
+                <span className="text-lg sm:text-xl font-black tracking-tight text-amber-400">
                   EYTAA
                 </span>
-                <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/5 text-neutral-400 border border-white/10">
                   v0.2.0
                 </span>
               </div>
-              <span className="text-[10px] sm:text-[11px] text-zinc-400 font-medium tracking-wide">
+              <span className="text-[10px] sm:text-[11px] text-neutral-400 font-medium tracking-wide">
                 Vistara Player • Windows
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation Links with Active ScrollSpy Indicator */}
-          <nav className="hidden lg:flex items-center gap-1.5 p-1 rounded-full bg-white/[0.03] border border-white/[0.06] backdrop-blur-md">
+          <nav aria-label="Primary" className="hidden lg:flex items-center gap-1.5 p-1 rounded-full bg-white/[0.03] border border-white/[0.08]">
             {NAV_ITEMS.map((item) => {
               const isActive = !isDocsPage && activeSection === item.id;
               return (
                 <Link
                   key={item.id}
                   href={item.href}
+                  aria-current={isActive ? "true" : undefined}
                   className={`relative px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 ${
                     isActive
-                      ? "text-black bg-gradient-to-r from-amber-300 to-amber-400 shadow-md shadow-amber-500/25"
-                      : "text-zinc-300 hover:text-white hover:bg-white/[0.06]"
+                      ? "text-black bg-amber-500"
+                      : "text-neutral-300 hover:text-white hover:bg-white/[0.06]"
                   }`}
                 >
                   {item.label}
@@ -126,10 +151,11 @@ export function Navbar() {
             {/* Docs & Releases Link */}
             <Link
               href="/docs"
+              aria-current={isDocsPage ? "page" : undefined}
               className={`relative flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold transition-all duration-200 ${
                 isDocsPage
-                  ? "text-black bg-gradient-to-r from-amber-300 to-amber-400 shadow-md shadow-amber-500/25"
-                  : "text-amber-300/90 hover:text-amber-200 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30"
+                  ? "text-black bg-amber-500"
+                  : "text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30"
               }`}
             >
               <BookOpen className="w-3.5 h-3.5" />
@@ -144,9 +170,9 @@ export function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               id="nav-github-btn"
-              className="flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-xl text-zinc-300 bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-white/20 transition-all duration-200"
+              className="flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-xl text-neutral-300 bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-white/20 transition-all duration-200"
             >
-              <GithubIcon className="w-4 h-4 text-zinc-300" />
+              <GithubIcon className="w-4 h-4 text-neutral-300" />
               <span>GitHub</span>
             </a>
 
@@ -154,7 +180,7 @@ export function Navbar() {
               href="/api/download?type=exe"
               download
               id="nav-download-btn"
-              className="group flex items-center gap-2 px-4 py-2 text-xs font-extrabold rounded-xl text-black bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 hover:from-amber-300 hover:to-amber-400 shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+              className="group flex items-center gap-2 px-4 py-2 text-xs font-extrabold rounded-xl text-black bg-amber-500 hover:bg-amber-400 shadow-sm hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
             >
               <Download className="w-3.5 h-3.5 text-black group-hover:scale-110 transition-transform" />
               <span>Download .EXE</span>
@@ -165,7 +191,7 @@ export function Navbar() {
           <button
             id="mobile-menu-toggle"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2.5 rounded-xl bg-white/[0.05] border border-white/10 text-zinc-300 hover:text-white transition-colors"
+            className="lg:hidden p-2.5 rounded-xl bg-white/[0.05] border border-white/10 text-neutral-300 hover:text-white transition-colors"
             aria-label="Toggle navigation menu"
             aria-expanded={mobileMenuOpen}
           >
@@ -176,73 +202,85 @@ export function Navbar() {
 
       {/* Responsive Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-[65px] bottom-0 bg-[#06080D]/95 backdrop-blur-2xl border-b border-white/10 overflow-y-auto px-6 py-6 animate-in fade-in slide-in-from-top-4 duration-200">
-          <div className="flex flex-col gap-2">
-            <div className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 px-3 py-1">
-              Navigation
+        <>
+          <div
+            className="lg:hidden fixed inset-0 z-0 bg-black/50 backdrop-blur-sm"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-hidden="true"
+          />
+          <div
+            style={{ top: headerHeight }}
+            className="lg:hidden fixed inset-x-0 bottom-0 z-10 bg-[#0a0a0a]/95 backdrop-blur-2xl border-b border-white/10 overflow-y-auto px-6 py-6 animate-in fade-in slide-in-from-top-4 duration-200"
+          >
+            <div className="flex flex-col gap-2">
+              <div className="text-[10px] font-bold uppercase tracking-wider text-neutral-500 px-3 py-1">
+                Navigation
+              </div>
+
+              {NAV_ITEMS.map((item) => {
+                const isActive = !isDocsPage && activeSection === item.id;
+                return (
+                  <Link
+                    key={item.id}
+                    href={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    aria-current={isActive ? "true" : undefined}
+                    className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
+                      isActive
+                        ? "bg-amber-400 text-black font-bold shadow-md shadow-amber-500/20"
+                        : "text-neutral-300 hover:text-white hover:bg-white/5"
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                    {isActive && <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-black/20 text-black">Active</span>}
+                  </Link>
+                );
+              })}
+
+              <Link
+                href="/docs"
+                onClick={() => setMobileMenuOpen(false)}
+                aria-current={isDocsPage ? "page" : undefined}
+                className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-bold transition-all mt-2 border ${
+                  isDocsPage
+                    ? "bg-amber-400 text-black border-amber-400"
+                    : "bg-amber-500/10 text-amber-300 border-amber-500/30 hover:bg-amber-500/20"
+                }`}
+              >
+                <div className="flex items-center gap-2">
+                  <BookOpen className="w-4 h-4 text-amber-400" />
+                  <span>Documentation &amp; Releases</span>
+                </div>
+                <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-300 border border-amber-500/40">
+                  All Versions
+                </span>
+              </Link>
             </div>
 
-            {NAV_ITEMS.map((item) => {
-              const isActive = !isDocsPage && activeSection === item.id;
-              return (
-                <Link
-                  key={item.id}
-                  href={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
-                    isActive
-                      ? "bg-amber-400 text-black font-bold shadow-md shadow-amber-500/20"
-                      : "text-zinc-300 hover:text-white hover:bg-white/5"
-                  }`}
-                >
-                  <span>{item.label}</span>
-                  {isActive && <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-black/20 text-black">Active</span>}
-                </Link>
-              );
-            })}
+            {/* Action CTAs in Mobile Drawer */}
+            <div className="mt-8 pt-6 border-t border-white/10 flex flex-col gap-3">
+              <a
+                href="/api/download?type=exe"
+                download
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-center gap-2.5 py-3.5 text-sm font-extrabold rounded-xl text-black bg-amber-500 active:scale-95 transition-all"
+              >
+                <Download className="w-4 h-4" />
+                <span>Download for Windows (.exe)</span>
+              </a>
 
-            <Link
-              href="/docs"
-              onClick={() => setMobileMenuOpen(false)}
-              className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-bold transition-all mt-2 border ${
-                isDocsPage
-                  ? "bg-amber-400 text-black border-amber-400"
-                  : "bg-amber-500/10 text-amber-300 border-amber-500/30 hover:bg-amber-500/20"
-              }`}
-            >
-              <div className="flex items-center gap-2">
-                <BookOpen className="w-4 h-4 text-amber-400" />
-                <span>Documentation &amp; Releases</span>
-              </div>
-              <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-300 border border-amber-500/40">
-                All Versions
-              </span>
-            </Link>
+              <a
+                href="https://github.com/dagijosi/Eytaa"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 py-3 text-xs font-semibold rounded-xl text-neutral-300 bg-white/[0.05] border border-white/10 hover:bg-white/10 transition-colors"
+              >
+                <GithubIcon className="w-4 h-4" />
+                <span>View source on GitHub</span>
+              </a>
+            </div>
           </div>
-
-          {/* Action CTAs in Mobile Drawer */}
-          <div className="mt-8 pt-6 border-t border-white/10 flex flex-col gap-3">
-            <a
-              href="/api/download?type=exe"
-              download
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center justify-center gap-2.5 py-3.5 text-sm font-extrabold rounded-xl text-black bg-gradient-to-r from-amber-400 to-amber-500 shadow-xl shadow-amber-500/25 active:scale-95 transition-all"
-            >
-              <Download className="w-4 h-4" />
-              <span>Direct Download .EXE (x64)</span>
-            </a>
-
-            <a
-              href="https://github.com/dagijosi/Eytaa"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 py-3 text-xs font-semibold rounded-xl text-zinc-300 bg-white/[0.05] border border-white/10 hover:bg-white/10 transition-colors"
-            >
-              <GithubIcon className="w-4 h-4" />
-              <span>GitHub Repository</span>
-            </a>
-          </div>
-        </div>
+        </>
       )}
     </header>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Download, CheckCircle2, Clock, ShieldCheck, FileDown, Sparkles, AlertCircle, ExternalLink } from "lucide-react";
+import { Download, CheckCircle2, Clock, ShieldCheck, FileDown } from "lucide-react";
 
 interface ReleaseAsset {
   id: number;
@@ -60,12 +60,12 @@ export function ReleaseArchive() {
 
   if (loading) {
     return (
-      <div className="p-12 glass-panel rounded-2xl text-center">
+      <div className="p-12 surface rounded-2xl text-center">
         <div className="w-8 h-8 mx-auto mb-3 border-2 border-amber-400 border-t-transparent rounded-full animate-spin" />
-        <div className="text-sm font-semibold text-zinc-300">
+        <div className="text-sm font-semibold text-neutral-300">
           Fetching live release registry from GitHub...
         </div>
-        <div className="text-xs text-zinc-500 mt-1">
+        <div className="text-xs text-neutral-500 mt-1">
           Always dynamic • updates automatically with every new release
         </div>
       </div>
@@ -85,7 +85,7 @@ export function ReleaseArchive() {
               <div className="text-sm font-bold text-white">
                 Downloading {downloadingFile}...
               </div>
-              <div className="text-xs text-zinc-300">
+              <div className="text-xs text-neutral-300">
                 Direct file download started. Check your browser downloads bar.
               </div>
             </div>
@@ -106,12 +106,12 @@ export function ReleaseArchive() {
               key={rel.id}
               className={`rounded-2xl overflow-hidden border transition-all ${
                 rel.isLatest
-                  ? "glass-panel-elevated border-amber-500/40"
-                  : "glass-panel border-white/10"
+                  ? "surface-raised border-amber-500/40"
+                  : "surface border-white/10"
               }`}
             >
               {/* Release Header */}
-              <div className="p-6 bg-[#0E121B] border-b border-white/10 flex flex-wrap items-center justify-between gap-4">
+              <div className="p-6 bg-[#141416] border-b border-white/10 flex flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
                   <span className="text-2xl font-black text-white font-mono">{rel.tag}</span>
                   {rel.isLatest && (
@@ -119,13 +119,13 @@ export function ReleaseArchive() {
                       Latest Production
                     </span>
                   )}
-                  <span className="text-xs text-zinc-400 font-mono flex items-center gap-1.5">
-                    <Clock className="w-3.5 h-3.5 text-zinc-500" />
+                  <span className="text-xs text-neutral-400 font-mono flex items-center gap-1.5">
+                    <Clock className="w-3.5 h-3.5 text-neutral-500" />
                     <span>{formatDate(rel.publishedAt)}</span>
                   </span>
                 </div>
 
-                <div className="text-xs text-zinc-400 font-medium">
+                <div className="text-xs text-neutral-400 font-medium">
                   {rel.name !== rel.tag && <span>{rel.name}</span>}
                 </div>
               </div>
@@ -133,7 +133,7 @@ export function ReleaseArchive() {
               {/* Release Body / Notes */}
               <div className="p-6">
                 {rel.body && (
-                  <div className="mb-6 p-4 rounded-xl bg-white/[0.02] border border-white/5 text-xs text-zinc-300 whitespace-pre-line leading-relaxed font-sans max-h-56 overflow-y-auto">
+                  <div className="mb-6 p-4 rounded-xl bg-white/[0.02] border border-white/5 text-xs text-neutral-300 whitespace-pre-line leading-relaxed font-sans max-h-56 overflow-y-auto">
                     {rel.body}
                   </div>
                 )}
@@ -145,7 +145,7 @@ export function ReleaseArchive() {
                       href={exeAsset.proxyDownloadUrl}
                       download
                       onClick={() => handleDownload(exeAsset.name)}
-                      className="flex items-center justify-between p-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-black font-bold text-xs shadow-md shadow-amber-500/10 hover:-translate-y-0.5 transition-all"
+                      className="flex items-center justify-between p-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs shadow-sm hover:-translate-y-0.5 transition-all"
                     >
                       <div className="flex items-center gap-2.5">
                         <Download className="w-4 h-4 text-black" />
@@ -167,18 +167,18 @@ export function ReleaseArchive() {
                       href={msiAsset.proxyDownloadUrl}
                       download
                       onClick={() => handleDownload(msiAsset.name)}
-                      className="flex items-center justify-between p-3.5 rounded-xl glass-panel hover:bg-white/10 text-white font-bold text-xs border-white/10 hover:border-white/20 hover:-translate-y-0.5 transition-all"
+                      className="flex items-center justify-between p-3.5 rounded-xl surface hover:bg-white/10 text-white font-bold text-xs border-white/10 hover:border-white/20 hover:-translate-y-0.5 transition-all"
                     >
                       <div className="flex items-center gap-2.5">
-                        <FileDown className="w-4 h-4 text-cyan-400" />
+                        <FileDown className="w-4 h-4 text-neutral-300" />
                         <div>
                           <div className="font-extrabold leading-none">Download .MSI Package</div>
-                          <div className="text-[10px] text-zinc-400 font-mono mt-0.5">
+                          <div className="text-[10px] text-neutral-400 font-mono mt-0.5">
                             {msiAsset.name}
                           </div>
                         </div>
                       </div>
-                      <span className="font-mono text-[11px] bg-white/10 px-2 py-0.5 rounded text-cyan-300">
+                      <span className="font-mono text-[11px] bg-white/10 px-2 py-0.5 rounded text-neutral-300">
                         {msiAsset.sizeFormatted}
                       </span>
                     </a>
@@ -188,7 +188,7 @@ export function ReleaseArchive() {
                 {/* Secondary Assets (Signatures, manifests) */}
                 {otherAssets.length > 0 && (
                   <div className="pt-3 border-t border-white/5 flex flex-wrap items-center gap-2">
-                    <span className="text-[11px] text-zinc-500 font-medium mr-1">
+                    <span className="text-[11px] text-neutral-500 font-medium mr-1">
                       Verification Signatures:
                     </span>
                     {otherAssets.map((asset) => (
@@ -197,9 +197,9 @@ export function ReleaseArchive() {
                         href={asset.proxyDownloadUrl}
                         download
                         onClick={() => handleDownload(asset.name)}
-                        className="px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 text-[10px] font-mono text-zinc-400 hover:text-white border border-white/10 transition-colors flex items-center gap-1"
+                        className="px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 text-[10px] font-mono text-neutral-400 hover:text-white border border-white/10 transition-colors flex items-center gap-1"
                       >
-                        <ShieldCheck className="w-3 h-3 text-zinc-500" />
+                        <ShieldCheck className="w-3 h-3 text-neutral-500" />
                         <span>{asset.name}</span>
                       </a>
                     ))}

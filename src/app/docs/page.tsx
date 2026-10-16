@@ -6,20 +6,14 @@ import { Footer } from "@/components/Footer";
 import { ReleaseArchive } from "./ReleaseArchive";
 import { DocsNav } from "./DocsNav";
 import {
-  BookOpen,
   Cpu,
   Tv,
   Sliders,
   Keyboard,
   Terminal,
   Download,
-  Shield,
   Layers,
-  ArrowRight,
-  ExternalLink,
   CheckCircle2,
-  FileCode,
-  FolderOpen,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -30,15 +24,15 @@ export const metadata: Metadata = {
 
 export default function DocsPage() {
   return (
-    <div className="flex min-h-screen flex-col bg-[#07090E] text-[#F3F4F6]">
+    <div className="flex min-h-screen flex-col bg-[#0a0a0a] text-[#F3F4F6]">
       <Navbar />
 
-      <main className="flex-1 pt-24 pb-20">
+      <main id="main-content" className="flex-1 pt-24 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Docs Header / Breadcrumbs */}
           <div className="py-6 border-b border-white/10 mb-8 flex flex-wrap items-center justify-between gap-4">
             <div>
-              <div className="flex items-center gap-2 text-xs text-zinc-400 font-mono mb-1">
+              <div className="flex items-center gap-2 text-xs text-neutral-400 font-mono mb-1">
                 <Link href="/" className="hover:text-amber-400 transition-colors">
                   Home
                 </Link>
@@ -48,6 +42,11 @@ export default function DocsPage() {
               <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
                 EYTAA Documentation &amp; Version Archive
               </h1>
+              <p className="mt-2 text-sm text-neutral-400 max-w-2xl leading-relaxed">
+                EYTAA is a free, fast, and private media player for Windows 10 &amp; 11. This page
+                explains what it does, how to install it, how to build it from source, and where to
+                download any past release.
+              </p>
             </div>
 
             <a
@@ -76,7 +75,7 @@ export default function DocsPage() {
                 <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
                   1. System Architecture &amp; The HWND Model
                 </h2>
-                <div className="mt-4 text-zinc-300 text-sm leading-relaxed space-y-4">
+                <div className="mt-4 text-neutral-300 text-sm leading-relaxed space-y-4">
                   <p>
                     <strong>EYTAA</strong> (internally designated as <em>Vistara Player</em>) is
                     engineered for Windows 10 and 11. It bridges the decoding horsepower of{" "}
@@ -89,12 +88,12 @@ export default function DocsPage() {
                     limiting high-bitrate 4K HDR responsiveness. EYTAA solves this by hosting Microsoft
                     WebView2 inside a native Win32 window configured with <code>transparent: true</code>.
                   </p>
-                  <div className="p-4 rounded-xl bg-[#090D15] border border-white/10 font-mono text-xs text-zinc-300">
+                  <div className="p-4 rounded-xl bg-[#111113] border border-white/10 font-mono text-xs text-neutral-300">
                     <div>Video Pipeline:</div>
                     <div className="text-amber-400 mt-1">
                       File &rarr; Direct3D11va / NVDEC &rarr; libmpv-2.dll &rarr; Win32 HWND Surface
                     </div>
-                    <div className="text-cyan-400 mt-1">
+                    <div className="text-neutral-300 mt-1">
                       UI Pipeline: React 19 + Tailwind v4 &rarr; WebView2 Transparent Overlay (60–144+ FPS)
                     </div>
                   </div>
@@ -103,20 +102,20 @@ export default function DocsPage() {
 
               {/* SECTION: Getting Started */}
               <section id="getting-started" className="scroll-mt-28">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-semibold uppercase tracking-wider mb-3">
-                  <Cpu className="w-3.5 h-3.5 text-cyan-400" />
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-neutral-300 text-xs font-semibold uppercase tracking-wider mb-3">
+                  <Cpu className="w-3.5 h-3.5 text-neutral-300" />
                   <span>Getting Started</span>
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
                   2. Installation &amp; System Prerequisites
                 </h2>
-                <div className="mt-4 text-zinc-300 text-sm leading-relaxed space-y-4">
+                <div className="mt-4 text-neutral-300 text-sm leading-relaxed space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="p-4 rounded-xl glass-panel border-white/10">
+                    <div className="p-4 rounded-xl surface border-white/10">
                       <div className="text-xs font-bold text-amber-400 uppercase tracking-wider mb-1">
                         Minimum System Specs
                       </div>
-                      <ul className="space-y-1 text-xs text-zinc-300 list-disc list-inside">
+                      <ul className="space-y-1 text-xs text-neutral-300 list-disc list-inside">
                         <li>Windows 10 (1903+) or Windows 11 (64-bit)</li>
                         <li>DirectX 11 compatible GPU (Intel, NVIDIA, AMD)</li>
                         <li>40 MB available RAM (idle)</li>
@@ -124,11 +123,11 @@ export default function DocsPage() {
                       </ul>
                     </div>
 
-                    <div className="p-4 rounded-xl glass-panel border-white/10">
-                      <div className="text-xs font-bold text-cyan-400 uppercase tracking-wider mb-1">
+                    <div className="p-4 rounded-xl surface border-white/10">
+                      <div className="text-xs font-bold text-neutral-300 uppercase tracking-wider mb-1">
                         Package Formats
                       </div>
-                      <ul className="space-y-1 text-xs text-zinc-300 list-disc list-inside">
+                      <ul className="space-y-1 text-xs text-neutral-300 list-disc list-inside">
                         <li>
                           <strong>.EXE Setup Wizard</strong>: Automatic desktop &amp; start menu
                           shortcuts, file associations.
@@ -159,12 +158,12 @@ export default function DocsPage() {
                 <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
                   3. Smart TV Series Architecture &amp; Quick-Hash
                 </h2>
-                <div className="mt-4 text-zinc-300 text-sm leading-relaxed space-y-4">
+                <div className="mt-4 text-neutral-300 text-sm leading-relaxed space-y-4">
                   <p>
                     EYTAA automatically organizes media folders without requiring third-party scraper
                     accounts:
                   </p>
-                  <ul className="space-y-2 text-xs text-zinc-300">
+                  <ul className="space-y-2 text-xs text-neutral-300">
                     <li className="flex items-start gap-2.5">
                       <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
                       <span>
@@ -195,41 +194,41 @@ export default function DocsPage() {
 
               {/* SECTION: Cinema & Audio Profiles */}
               <section id="profiles" className="scroll-mt-28">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-semibold uppercase tracking-wider mb-3">
-                  <Sliders className="w-3.5 h-3.5 text-cyan-400" />
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-neutral-300 text-xs font-semibold uppercase tracking-wider mb-3">
+                  <Sliders className="w-3.5 h-3.5 text-neutral-300" />
                   <span>Playback Tuning</span>
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
                   4. Studio Audio &amp; Video Profiles
                 </h2>
-                <div className="mt-4 text-zinc-300 text-sm leading-relaxed space-y-4">
-                  <p>Cycle profiles with hotkey <kbd className="px-2 py-0.5 rounded bg-zinc-800 border border-white/10 font-mono text-xs">C</kbd>:</p>
+                <div className="mt-4 text-neutral-300 text-sm leading-relaxed space-y-4">
+                  <p>Cycle profiles with hotkey <kbd className="px-2 py-0.5 rounded bg-neutral-800 border border-white/10 font-mono text-xs">C</kbd>:</p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="p-4 rounded-xl glass-panel border-white/10">
+                    <div className="p-4 rounded-xl surface border-white/10">
                       <div className="text-xs font-bold text-amber-300">Anime &amp; Animation</div>
-                      <div className="text-xs text-zinc-400 mt-1">
+                      <div className="text-xs text-neutral-400 mt-1">
                         Saturation +14, contrast +6, and soft yellow (<code>#FFF176</code>) subtitles
                         with black contour borders for clear reading against bright animated backdrops.
                       </div>
                     </div>
-                    <div className="p-4 rounded-xl glass-panel border-white/10">
-                      <div className="text-xs font-bold text-cyan-300">Cinema &amp; Night Loudnorm</div>
-                      <div className="text-xs text-zinc-400 mt-1">
+                    <div className="p-4 rounded-xl surface border-white/10">
+                      <div className="text-xs font-bold text-neutral-300">Cinema &amp; Night Loudnorm</div>
+                      <div className="text-xs text-neutral-400 mt-1">
                         Filmic contrast (+5), deeper shadow blacks, and FFmpeg loudnorm compression (
                         <code>lavfi=[loudnorm=I=-16:TP=-1.5:LRA=7]</code>) taming loud explosions while
                         boosting whispered dialogue.
                       </div>
                     </div>
-                    <div className="p-4 rounded-xl glass-panel border-white/10">
+                    <div className="p-4 rounded-xl surface border-white/10">
                       <div className="text-xs font-bold text-emerald-300">Podcasts &amp; Lectures</div>
-                      <div className="text-xs text-zinc-400 mt-1">
+                      <div className="text-xs text-neutral-400 mt-1">
                         Highpass 90Hz and lowpass 4500Hz speech clarity bandpass filter, +2dB volume
                         boost, and automatic 1.25x speed preset.
                       </div>
                     </div>
-                    <div className="p-4 rounded-xl glass-panel border-white/10">
-                      <div className="text-xs font-bold text-zinc-200">Custom SQLite Profiles</div>
-                      <div className="text-xs text-zinc-400 mt-1">
+                    <div className="p-4 rounded-xl surface border-white/10">
+                      <div className="text-xs font-bold text-neutral-200">Custom SQLite Profiles</div>
+                      <div className="text-xs text-neutral-400 mt-1">
                         Create, tune, save, and delete custom named audio and video profiles stored in
                         the local SQLite database (<code>eytaa.db</code>).
                       </div>
@@ -250,47 +249,47 @@ export default function DocsPage() {
                 <div className="mt-4 overflow-x-auto">
                   <table className="w-full text-left text-xs border-collapse">
                     <thead>
-                      <tr className="border-b border-white/10 bg-white/5 font-bold uppercase tracking-wider text-zinc-400">
+                      <tr className="border-b border-white/10 bg-white/5 font-bold uppercase tracking-wider text-neutral-400">
                         <th className="py-2.5 px-4">Key</th>
                         <th className="py-2.5 px-4">Action</th>
                         <th className="py-2.5 px-4">Scope</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-white/5 font-mono text-zinc-300">
+                    <tbody className="divide-y divide-white/5 font-mono text-neutral-300">
                       <tr>
                         <td className="py-2 px-4 font-bold text-amber-400">Space</td>
                         <td className="py-2 px-4 font-sans text-white">Toggle Play / Pause</td>
-                        <td className="py-2 px-4 text-zinc-500">In-App</td>
+                        <td className="py-2 px-4 text-neutral-500">In-App</td>
                       </tr>
                       <tr>
                         <td className="py-2 px-4 font-bold text-amber-400">&larr; / &rarr;</td>
                         <td className="py-2 px-4 font-sans text-white">Seek 5s backward / forward</td>
-                        <td className="py-2 px-4 text-zinc-500">In-App</td>
+                        <td className="py-2 px-4 text-neutral-500">In-App</td>
                       </tr>
                       <tr>
                         <td className="py-2 px-4 font-bold text-amber-400">Shift + &larr; / &rarr;</td>
                         <td className="py-2 px-4 font-sans text-white">Seek 30s backward / forward</td>
-                        <td className="py-2 px-4 text-zinc-500">In-App</td>
+                        <td className="py-2 px-4 text-neutral-500">In-App</td>
                       </tr>
                       <tr>
                         <td className="py-2 px-4 font-bold text-amber-400">&uarr; / &darr;</td>
                         <td className="py-2 px-4 font-sans text-white">Volume +5% / -5%</td>
-                        <td className="py-2 px-4 text-zinc-500">In-App</td>
+                        <td className="py-2 px-4 text-neutral-500">In-App</td>
                       </tr>
                       <tr>
                         <td className="py-2 px-4 font-bold text-amber-400">P</td>
                         <td className="py-2 px-4 font-sans text-white">Toggle Picture-in-Picture (PiP)</td>
-                        <td className="py-2 px-4 text-zinc-500">In-App</td>
+                        <td className="py-2 px-4 text-neutral-500">In-App</td>
                       </tr>
                       <tr>
                         <td className="py-2 px-4 font-bold text-amber-400">C</td>
                         <td className="py-2 px-4 font-sans text-white">Cycle Playback Profile (Anime, Cinema, Balanced)</td>
-                        <td className="py-2 px-4 text-zinc-500">In-App</td>
+                        <td className="py-2 px-4 text-neutral-500">In-App</td>
                       </tr>
                       <tr>
                         <td className="py-2 px-4 font-bold text-amber-400">MediaPlayPause</td>
                         <td className="py-2 px-4 font-sans text-white">Global hardware media key Play/Pause</td>
-                        <td className="py-2 px-4 text-cyan-400 font-semibold">System-Wide</td>
+                        <td className="py-2 px-4 text-neutral-300 font-semibold">System-Wide</td>
                       </tr>
                     </tbody>
                   </table>
@@ -299,16 +298,16 @@ export default function DocsPage() {
 
               {/* SECTION: Building From Source */}
               <section id="build-from-source" className="scroll-mt-28">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-semibold uppercase tracking-wider mb-3">
-                  <Terminal className="w-3.5 h-3.5 text-cyan-400" />
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-neutral-300 text-xs font-semibold uppercase tracking-wider mb-3">
+                  <Terminal className="w-3.5 h-3.5 text-neutral-300" />
                   <span>Developer Build</span>
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
                   6. Building From Source on Windows
                 </h2>
-                <div className="mt-4 text-zinc-300 text-sm leading-relaxed space-y-4">
+                <div className="mt-4 text-neutral-300 text-sm leading-relaxed space-y-4">
                   <p>Prerequisites: Node.js 20+, Rust 1.77+, Visual Studio C++ Build Tools.</p>
-                  <pre className="p-4 rounded-xl bg-[#080B12] border border-white/10 font-mono text-xs text-zinc-300 overflow-x-auto leading-relaxed">
+                  <pre className="p-4 rounded-xl bg-[#0e0e10] border border-white/10 font-mono text-xs text-neutral-300 overflow-x-auto leading-relaxed">
                     <code>{`# 1. Clone the repository
 git clone https://github.com/dagijosi/Eytaa.git
 cd Eytaa/player
@@ -337,7 +336,7 @@ npm run tauri:build`}</code>
                 <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
                   7. Release Archive &amp; Version Downloads
                 </h2>
-                <p className="mt-3 text-sm text-zinc-300 leading-relaxed mb-8">
+                <p className="mt-3 text-sm text-neutral-300 leading-relaxed mb-8">
                   Below is the live, dynamic archive of all EYTAA releases fetched directly from the
                   GitHub registry. Whenever a new version is published, it automatically appears here.
                   Click any installer below to download the direct binary immediately without leaving this page.

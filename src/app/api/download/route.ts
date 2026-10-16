@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
+interface GithubAsset {
+  name: string;
+  browser_download_url: string;
+}
+
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const tag = searchParams.get("tag"); // e.g. "v0.2.0" or undefined for latest
@@ -26,18 +31,18 @@ export async function GET(request: NextRequest) {
 
     if (response.ok) {
       const data = await response.json();
-      const assets = data.assets || [];
+      const assets: GithubAsset[] = Array.isArray(data.assets) ? data.assets : [];
 
       if (exactName) {
         const found = assets.find(
-          (a: any) => a.name.toLowerCase() === exactName.toLowerCase()
+          (a: GithubAsset) => a.name.toLowerCase() === exactName.toLowerCase()
         );
         if (found?.browser_download_url) {
           targetUrl = found.browser_download_url;
           filename = found.name;
         }
       } else if (type === "msi") {
-        const msiAsset = assets.find((a: any) =>
+        const msiAsset = assets.find((a: GithubAsset) =>
           a.name.toLowerCase().endsWith(".msi")
         );
         if (msiAsset?.browser_download_url) {
@@ -45,7 +50,7 @@ export async function GET(request: NextRequest) {
           filename = msiAsset.name;
         }
       } else {
-        const exeAsset = assets.find((a: any) =>
+        const exeAsset = assets.find((a: GithubAsset) =>
           a.name.toLowerCase().endsWith(".exe")
         );
         if (exeAsset?.browser_download_url) {

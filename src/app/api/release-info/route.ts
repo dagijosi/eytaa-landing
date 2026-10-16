@@ -1,5 +1,11 @@
 import { NextResponse } from "next/server";
 
+interface GithubAsset {
+  name: string;
+  size: number;
+  browser_download_url: string;
+}
+
 export async function GET() {
   try {
     const res = await fetch(
@@ -15,10 +21,11 @@ export async function GET() {
 
     if (res.ok) {
       const data = await res.json();
-      const exe = data.assets?.find((a: any) =>
+      const assets: GithubAsset[] = Array.isArray(data.assets) ? data.assets : [];
+      const exe = assets.find((a: GithubAsset) =>
         a.name.toLowerCase().endsWith(".exe")
       );
-      const msi = data.assets?.find((a: any) =>
+      const msi = assets.find((a: GithubAsset) =>
         a.name.toLowerCase().endsWith(".msi")
       );
 

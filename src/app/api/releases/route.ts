@@ -1,5 +1,24 @@
 import { NextResponse } from "next/server";
 
+interface GithubAsset {
+  id: number;
+  name: string;
+  size: number;
+  download_count: number;
+  browser_download_url: string;
+}
+
+interface GithubRelease {
+  id: number;
+  tag_name: string;
+  name: string | null;
+  published_at: string;
+  body: string | null;
+  prerelease: boolean;
+  html_url: string;
+  assets?: GithubAsset[];
+}
+
 export async function GET() {
   try {
     const res = await fetch("https://api.github.com/repos/dagijosi/Eytaa/releases", {
@@ -13,8 +32,8 @@ export async function GET() {
     if (res.ok) {
       const data = await res.json();
       if (Array.isArray(data)) {
-        const releases = data.map((rel: any, index: number) => {
-          const assets = (rel.assets || []).map((asset: any) => {
+        const releases = data.map((rel: GithubRelease, index: number) => {
+          const assets = (rel.assets || []).map((asset: GithubAsset) => {
             const sizeMb = (asset.size / (1024 * 1024)).toFixed(1);
             const isExe = asset.name.toLowerCase().endsWith(".exe");
             const isMsi = asset.name.toLowerCase().endsWith(".msi");

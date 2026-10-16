@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { GitCommit, Sparkles, Shield, Tv, CheckCircle, ChevronRight, Zap } from "lucide-react";
+import { GitCommit, CheckCircle, ChevronRight } from "lucide-react";
 
 const RELEASES = [
   {
@@ -69,20 +69,20 @@ export function ChangelogTimeline() {
   const [expandedIndex, setExpandedIndex] = useState<number>(0);
 
   return (
-    <section id="changelog" className="py-24 relative bg-[#090C14]">
+    <section id="changelog" className="py-24 relative bg-[#0c0c0c]">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-semibold uppercase tracking-wider mb-3">
-            <GitCommit className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Evolution & Releases</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-neutral-300 text-xs font-semibold uppercase tracking-wider mb-3">
+            <GitCommit className="w-3.5 h-3.5 text-neutral-300" />
+            <span>Release history</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
-            Changelog & Release Notes
+            What&apos;s new in EYTAA
           </h2>
-          <p className="mt-4 text-zinc-300 text-sm sm:text-base">
-            Track our rapid cadence of desktop refinements, decoding engine improvements, and UX
-            upgrades.
+          <p className="mt-4 text-neutral-300 text-sm sm:text-base leading-relaxed">
+            Every version and what changed in it. The newest release is open by default &mdash;
+            select any version to read its full notes.
           </p>
         </div>
 
@@ -97,13 +97,14 @@ export function ChangelogTimeline() {
                 key={idx}
                 className={`rounded-2xl transition-all duration-300 overflow-hidden border ${
                   isLatest
-                    ? "glass-panel-elevated border-amber-500/40"
-                    : "glass-panel border-white/5 hover:border-white/20"
+                    ? "surface-raised border-amber-500/40"
+                    : "surface border-white/5 hover:border-white/20"
                 }`}
               >
                 {/* Header row */}
                 <button
                   onClick={() => setExpandedIndex(isExpanded ? -1 : idx)}
+                  aria-expanded={isExpanded}
                   className="w-full p-6 text-left flex flex-wrap items-center justify-between gap-4 select-none"
                 >
                   <div className="flex items-center gap-3">
@@ -112,24 +113,20 @@ export function ChangelogTimeline() {
                       className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${
                         rel.badgeColor === "amber"
                           ? "bg-amber-500/15 text-amber-300 border-amber-500/30"
-                          : rel.badgeColor === "cyan"
-                          ? "bg-cyan-500/15 text-cyan-300 border-cyan-500/30"
-                          : rel.badgeColor === "indigo"
-                          ? "bg-indigo-500/15 text-indigo-300 border-indigo-500/30"
-                          : "bg-white/10 text-zinc-300 border-white/10"
+                          : "bg-white/5 text-neutral-300 border-white/10"
                       }`}
                     >
                       {rel.badge}
                     </span>
-                    <span className="text-xs text-zinc-500 font-mono hidden sm:inline">
+                    <span className="text-xs text-neutral-500 font-mono hidden sm:inline">
                       {rel.date}
                     </span>
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-zinc-400 hidden md:inline">{rel.tagline}</span>
+                    <span className="text-xs text-neutral-400 hidden md:inline">{rel.tagline}</span>
                     <ChevronRight
-                      className={`w-4 h-4 text-zinc-400 transition-transform duration-200 ${
+                      className={`w-4 h-4 text-neutral-400 transition-transform duration-200 ${
                         isExpanded ? "rotate-90 text-amber-400" : ""
                       }`}
                     />
@@ -139,10 +136,10 @@ export function ChangelogTimeline() {
                 {/* Expanded content */}
                 {isExpanded && (
                   <div className="px-6 pb-6 pt-2 border-t border-white/5">
-                    <div className="text-sm font-semibold text-zinc-200 mb-3">{rel.tagline}</div>
+                    <div className="text-sm font-semibold text-neutral-200 mb-3">{rel.tagline}</div>
                     <ul className="space-y-2.5">
                       {rel.highlights.map((item, itemIdx) => (
-                        <li key={itemIdx} className="flex items-start gap-3 text-sm text-zinc-300">
+                        <li key={itemIdx} className="flex items-start gap-3 text-sm text-neutral-300">
                           <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
                           <span>{item}</span>
                         </li>

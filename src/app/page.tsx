@@ -11,11 +11,11 @@ import { Footer } from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col bg-[#07090E] text-[#F3F4F6]">
+    <div className="flex min-h-screen flex-col bg-[#0a0a0a] text-[#F3F4F6]">
       {/* Fixed Navigation Bar */}
       <Navbar />
 
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         {/* Hero Section */}
         <Hero />
 

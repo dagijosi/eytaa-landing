@@ -36,8 +36,8 @@ export function DocsNav() {
   }, []);
 
   return (
-    <div className="sticky top-24 p-4 rounded-2xl glass-panel border-white/10 space-y-2">
-      <div className="text-[11px] font-bold uppercase tracking-wider text-zinc-400 px-3 py-1">
+    <div className="sticky top-24 p-4 rounded-2xl surface border-white/10 space-y-2">
+      <div className="text-[11px] font-bold uppercase tracking-wider text-neutral-400 px-3 py-1">
         Chapters
       </div>
       <nav className="space-y-1 text-xs">
@@ -57,7 +57,7 @@ export function DocsNav() {
                     : "bg-white/10 text-white font-bold border border-white/10 shadow-sm"
                   : isReleaseArchive
                   ? "bg-amber-500/10 text-amber-300 border border-amber-500/30 hover:bg-amber-500/20"
-                  : "text-zinc-400 hover:text-zinc-200 hover:bg-white/5"
+                  : "text-neutral-400 hover:text-neutral-200 hover:bg-white/5"
               }`}
             >
               <Icon
@@ -68,7 +68,7 @@ export function DocsNav() {
                       : "text-amber-400"
                     : isReleaseArchive
                     ? "text-amber-400"
-                    : "text-zinc-400"
+                    : "text-neutral-400"
                 }`}
               />
               <span className="truncate">{item.label}</span>

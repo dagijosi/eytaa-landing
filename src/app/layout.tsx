@@ -15,7 +15,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#08090C",
+  themeColor: "#0a0a0a",
   colorScheme: "dark",
 };
 
@@ -76,7 +76,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${jakarta.variable} ${jetbrainsMono.variable} dark scroll-smooth`}>
-      <body className="min-h-screen bg-[#07090E] text-[#F3F4F6] antialiased selection:bg-amber-500/25 selection:text-amber-200">
+      <body className="min-h-screen bg-[#0a0a0a] text-[#F3F4F6] antialiased selection:bg-amber-500/25 selection:text-amber-200">
         {children}
       </body>
     </html>
