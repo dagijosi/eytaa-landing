@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { track } from "@vercel/analytics";
 import {
   Download,
   Monitor,
@@ -54,6 +55,7 @@ export function DownloadCTA() {
   };
 
   const triggerDownload = (type: "exe" | "msi", filename: string) => {
+    track("Download", { type, location: "download-section" });
     setDownloadStarted(filename);
     setTimeout(() => setDownloadStarted(null), 6000);
   };

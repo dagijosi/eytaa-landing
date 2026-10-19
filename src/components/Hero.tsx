@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { track } from "@vercel/analytics";
 import { Download, Cpu, Zap, Database, ArrowRight, Play, CheckCircle2, FolderSync } from "lucide-react";
 
 export function Hero() {
@@ -46,6 +47,7 @@ export function Hero() {
           <a
             href="/api/download?type=exe"
             download
+            onClick={() => track("Download", { type: "exe", location: "hero" })}
             id="hero-download-cta"
             className="w-full sm:w-auto group flex items-center justify-center gap-3 px-7 py-4 rounded-2xl font-bold text-sm text-black bg-amber-500 hover:bg-amber-400 shadow-lg shadow-amber-500/20 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
           >
