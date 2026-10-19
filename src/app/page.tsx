@@ -9,10 +9,13 @@ import { ShortcutsCheatSheet } from "@/components/ShortcutsCheatSheet";
 import { ChangelogTimeline } from "@/components/ChangelogTimeline";
 import { DownloadCTA } from "@/components/DownloadCTA";
 import { Footer } from "@/components/Footer";
+import { SoftwareJsonLd } from "@/components/SoftwareJsonLd";
 
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-[#0a0a0a] text-[#F3F4F6]">
+      <SoftwareJsonLd />
+
       {/* Fixed Navigation Bar */}
       <Navbar />
 

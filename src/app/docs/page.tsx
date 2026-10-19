@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/site";
 import { ReleaseArchive } from "./ReleaseArchive";
 import { DocsNav } from "./DocsNav";
 import {
@@ -16,10 +17,38 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
+const DOCS_TITLE = "Documentation & Release Archive — EYTAA Player";
+const DOCS_DESCRIPTION =
+  "Comprehensive guides, system architecture, keyboard shortcuts, build instructions, and dynamic release downloads for EYTAA Player on Windows.";
+
 export const metadata: Metadata = {
-  title: "Documentation & Release Archive — EYTAA Player",
-  description:
-    "Comprehensive guides, system architecture, keyboard shortcuts, build instructions, and dynamic release downloads for EYTAA Player on Windows.",
+  title: DOCS_TITLE,
+  description: DOCS_DESCRIPTION,
+  alternates: {
+    canonical: "/docs",
+  },
+  openGraph: {
+    title: DOCS_TITLE,
+    description: DOCS_DESCRIPTION,
+    url: `${SITE_URL}/docs`,
+    siteName: SITE_NAME,
+    images: [OG_IMAGE],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: DOCS_TITLE,
+    description: DOCS_DESCRIPTION,
+    images: [
+      {
+        url: OG_IMAGE.url,
+        width: OG_IMAGE.width,
+        height: OG_IMAGE.height,
+        alt: OG_IMAGE.alt,
+      },
+    ],
+  },
 };
 
 export default function DocsPage() {
