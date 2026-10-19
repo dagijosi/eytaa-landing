@@ -8,15 +8,32 @@ import {
   LayoutGrid,
   Sliders,
   Moon,
-  Type,
-  Subtitles,
+  Keyboard,
+  Palette,
+  Radio,
   Cpu,
+  Fingerprint,
+  PanelsTopLeft,
   ListChecks,
 } from "lucide-react";
 
 const FEATURES = [
   {
+    icon: LayoutGrid,
+    title: "Your folders become a library",
+    badge: "Smart Media Center v2",
+    description:
+      "Point EYTAA at your media folders once. It indexes movies, series, and music into local SQLite, groups every season and episode, and keeps a resume point for each one.",
+  },
+  {
     icon: FolderSync,
+    title: "The library updates itself",
+    badge: "Live File Watcher",
+    description:
+      "A native filesystem watcher notices new, renamed, or deleted files and refreshes the library instantly — no manual rescans, no stale entries.",
+  },
+  {
+    icon: Fingerprint,
     title: "Never lose your place",
     badge: "Quick-Hash <0.1ms",
     description:
@@ -30,6 +47,27 @@ const FEATURES = [
       "Open any single episode and EYTAA finds its siblings in the same folder (S01E01, 1x02, [Group] - 03), then offers to queue every episode in order.",
   },
   {
+    icon: Sliders,
+    title: "Right look and sound, one click",
+    badge: "9 Profiles",
+    description:
+      "Anime, Cinema, Music, Podcasts, Late Night, HDR Vivid Pop, Action & Blockbuster, Vintage Cinema, and Balanced — each tunes picture, audio, speed, and subtitles together.",
+  },
+  {
+    icon: Palette,
+    title: "Make it look like yours",
+    badge: "12 Skins",
+    description:
+      "Twelve complete design skins plus custom accents, glass styles, scrubber geometry, and full subtitle typography. Your player should not look like everyone else's.",
+  },
+  {
+    icon: Radio,
+    title: "Streams are first-class",
+    badge: "HLS • RTSP • RTMP",
+    description:
+      "Open direct URLs and network streams alongside local files, then check codecs, hardware decode mode, dropped frames, and FPS with the F9 stats overlay.",
+  },
+  {
     icon: Layers,
     title: "Float video above your work",
     badge: "Picture-in-Picture",
@@ -37,18 +75,11 @@ const FEATURES = [
       "Pop playback into a small always-on-top mini player sized correctly for your monitor's DPI, with its own scrubber and a one-click restore to the full window.",
   },
   {
-    icon: LayoutGrid,
+    icon: PanelsTopLeft,
     title: "Snap the window anywhere",
     badge: "Native Layouts",
     description:
       "Half screen, two-thirds sidebar, quarter quadrant, or centered — exact Windows snap layouts without installing a tiling manager.",
-  },
-  {
-    icon: Sliders,
-    title: "Right look and sound, one click",
-    badge: "Studio Profiles",
-    description:
-      "Anime (richer color + soft yellow subtitles), Cinema (filmic contrast + volume that tames explosions), and Vocal Clarity for podcasts and lectures.",
   },
   {
     icon: Moon,
@@ -58,18 +89,11 @@ const FEATURES = [
       "Set 15–120 minutes or 'end of this episode'. Volume fades out gently over 30 seconds instead of cutting to silence, and playback pauses when you close the lid.",
   },
   {
-    icon: Type,
-    title: "Clean, readable titles",
-    badge: "Auto Formatter",
+    icon: Keyboard,
+    title: "Every key is your key",
+    badge: "Rebindable",
     description:
-      "Tracker and scene noise ([SubsPlease], RARBG, x264, 1080p BluRay) is stripped away, leaving tidy season and episode badges everywhere.",
-  },
-  {
-    icon: Subtitles,
-    title: "Subtitles that render correctly",
-    badge: "libass Built-In",
-    description:
-      "Complex ASS/SSA typesetting, karaoke effects, embedded fonts, and PGS image subtitles all work out of the box — no extra codecs or filter packs.",
+      "Rebind every action in Settings, or control playback with Windows media keys while EYTAA is in the background. Nothing is locked to someone else's defaults.",
   },
   {
     icon: Cpu,
@@ -91,11 +115,11 @@ export function FeaturesGrid() {
             <span>What you get</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
-            Nine frustrations, solved
+            Everything they make you set up, built in
           </h2>
           <p className="mt-4 text-neutral-300 text-sm sm:text-base leading-relaxed">
-            Every feature below exists because other players get it wrong — no plugins, no setup
-            screens, no account. It works the moment you install it.
+            Your library, seasons, profiles, subtitles, and window layout are all handled natively —
+            no plugins, no scraper accounts, no setup screens. It works the moment you install it.
           </p>
         </div>
 

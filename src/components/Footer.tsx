@@ -82,7 +82,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/#changelog" className="hover:text-amber-400 transition-colors">
-                  Changelog (v0.2.0)
+                  Changelog (v0.2.5)
                 </Link>
               </li>
             </ul>

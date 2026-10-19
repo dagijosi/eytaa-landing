@@ -60,9 +60,9 @@ export function DownloadCTA() {
     setTimeout(() => setDownloadStarted(null), 6000);
   };
 
-  const exeSize = release?.exe?.sizeMb || "33.4";
-  const msiSize = release?.msi?.sizeMb || "44.6";
-  const version = release?.version || "v0.2.0";
+  const exeSize = release?.exe?.sizeMb || "33.5";
+  const msiSize = release?.msi?.sizeMb || "44.7";
+  const version = release?.version || "v0.2.5";
 
   return (
     <section id="download" className="py-24 relative">

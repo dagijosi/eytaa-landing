@@ -156,7 +156,7 @@ export default function DocsPage() {
                   <span>Media Management</span>
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-                  3. Smart TV Series Architecture &amp; Quick-Hash
+                  3. Smart Media Center, Live Watcher &amp; Quick-Hash
                 </h2>
                 <div className="mt-4 text-neutral-300 text-sm leading-relaxed space-y-4">
                   <p>
@@ -164,6 +164,30 @@ export default function DocsPage() {
                     accounts:
                   </p>
                   <ul className="space-y-2 text-xs text-neutral-300">
+                    <li className="flex items-start gap-2.5">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                      <span>
+                        <strong>Local SQLite Library</strong>: Recursively scans your folders, indexes
+                        movies, series, episodes, and music, generates thumbnails, and pages through
+                        large collections without loading everything at once.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                      <span>
+                        <strong>Live Filesystem Watcher</strong>: A native watcher notices files
+                        added, renamed, or deleted on disk and refreshes the library instantly — no
+                        manual rescan required.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                      <span>
+                        <strong>Virtualized Grid</strong>: A TanStack virtualized media grid keeps
+                        scrolling smooth with 1,000+ items, backed by debounced search and
+                        database-level pagination.
+                      </span>
+                    </li>
                     <li className="flex items-start gap-2.5">
                       <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
                       <span>
@@ -185,7 +209,8 @@ export default function DocsPage() {
                       <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
                       <span>
                         <strong>Zero-Crop Presentation</strong>: Displays artwork without clipping
-                        content, backed by an ambient <code>blur-xl opacity-45</code> color glow.
+                        content, backed by an ambient <code>blur-xl opacity-45</code> color glow, with
+                        16:9 landscape and 2:3 portrait modes.
                       </span>
                     </li>
                   </ul>
@@ -199,10 +224,14 @@ export default function DocsPage() {
                   <span>Playback Tuning</span>
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-                  4. Studio Audio &amp; Video Profiles
+                  4. Nine Studio Audio &amp; Video Profiles
                 </h2>
                 <div className="mt-4 text-neutral-300 text-sm leading-relaxed space-y-4">
-                  <p>Cycle profiles with hotkey <kbd className="px-2 py-0.5 rounded bg-neutral-800 border border-white/10 font-mono text-xs">C</kbd>:</p>
+                  <p>
+                    Nine built-in profiles tune picture, audio, speed, and subtitles together.
+                    Cycle them with hotkey{" "}
+                    <kbd className="px-2 py-0.5 rounded bg-neutral-800 border border-white/10 font-mono text-xs">C</kbd>:
+                  </p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="p-4 rounded-xl surface border-white/10">
                       <div className="text-xs font-bold text-amber-300">Anime &amp; Animation</div>
@@ -227,10 +256,11 @@ export default function DocsPage() {
                       </div>
                     </div>
                     <div className="p-4 rounded-xl surface border-white/10">
-                      <div className="text-xs font-bold text-neutral-200">Custom SQLite Profiles</div>
+                      <div className="text-xs font-bold text-neutral-200">9 Built-In + Custom Profiles</div>
                       <div className="text-xs text-neutral-400 mt-1">
-                        Create, tune, save, and delete custom named audio and video profiles stored in
-                        the local SQLite database (<code>eytaa.db</code>).
+                        Also includes Late Night, HDR Vivid Pop, Action &amp; Blockbuster, Vintage
+                        Cinema, Music, and Balanced. Tune, clone, save, and share custom profiles as
+                        JSON, stored in the local SQLite database (<code>eytaa.db</code>).
                       </div>
                     </div>
                   </div>

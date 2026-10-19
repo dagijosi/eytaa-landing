@@ -6,8 +6,8 @@ import { BookOpen, Cpu, Tv, Sliders, Keyboard, Terminal, Download } from "lucide
 const DOCS_NAV_ITEMS = [
   { id: "overview", label: "1. Overview & Architecture", icon: BookOpen },
   { id: "getting-started", label: "2. Getting Started & Specs", icon: Cpu },
-  { id: "media-center", label: "3. Smart TV Series Center", icon: Tv },
-  { id: "profiles", label: "4. Studio Audio & Visual Profiles", icon: Sliders },
+  { id: "media-center", label: "3. Smart Media Center & Library", icon: Tv },
+  { id: "profiles", label: "4. 9 Playback Profiles & Tuning", icon: Sliders },
   { id: "shortcuts", label: "5. Keyboard Hotkeys Reference", icon: Keyboard },
   { id: "build-from-source", label: "6. Building From Source", icon: Terminal },
   { id: "releases", label: "7. Dynamic Release Archive", icon: Download },

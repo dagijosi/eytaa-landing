@@ -7,8 +7,8 @@ interface GithubAsset {
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const tag = searchParams.get("tag"); // e.g. "v0.2.0" or undefined for latest
-  const exactName = searchParams.get("name"); // e.g. "EYTAA_0.2.0_x64-setup.exe"
+  const tag = searchParams.get("tag"); // e.g. "v0.2.5" or undefined for latest
+  const exactName = searchParams.get("name"); // e.g. "EYTAA_0.2.5_x64-setup.exe"
   const type = (searchParams.get("type") || searchParams.get("format") || "exe").toLowerCase();
   const shouldStream = searchParams.get("stream") === "true";
 
@@ -65,7 +65,7 @@ export async function GET(request: NextRequest) {
 
   // Fallback direct URL if GitHub API was unreachable or rate-limited
   if (!targetUrl) {
-    const fallbackTag = tag || "v0.2.0";
+    const fallbackTag = tag || "v0.2.5";
     if (type === "msi") {
       targetUrl = `https://github.com/dagijosi/Eytaa/releases/download/${fallbackTag}/EYTAA_${fallbackTag.replace("v","")}_x64_en-US.msi`;
       filename = `EYTAA_${fallbackTag.replace("v","")}_x64_en-US.msi`;

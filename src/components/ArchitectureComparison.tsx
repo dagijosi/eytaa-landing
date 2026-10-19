@@ -11,16 +11,18 @@ export function ArchitectureComparison() {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold uppercase tracking-wider mb-3">
             <Cpu className="w-3.5 h-3.5 text-amber-400" />
-            <span>Why it feels faster</span>
+            <span>Why EYTAA</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
-            Why EYTAA feels faster
+            Faster playback. Less manual work.
           </h2>
           <p className="mt-4 text-neutral-300 text-sm sm:text-base leading-relaxed">
             Many modern players are web apps in disguise: every video frame is drawn through a
             browser engine, which costs hundreds of megabytes of RAM and stutters on high-bitrate
             4K. EYTAA sends video straight to your graphics card and only draws the controls in the
-            app window. That single decision is where the speed and low memory come from.
+            app window. That same engineering carries into the media center — folders are indexed
+            locally, series are grouped automatically, and the library stays current without a
+            plugin.
           </p>
         </div>
 
@@ -246,12 +248,28 @@ export function ArchitectureComparison() {
 
                 <tr>
                   <td className="py-4 px-6 font-medium text-white">
-                    <div>Smart TV Series &amp; Episode Auto-Detection</div>
-                    <div className="text-xs text-neutral-500">Automatic sibling grouping &amp; sorting</div>
+                    <div>Self-Organizing Media Library</div>
+                    <div className="text-xs text-neutral-500">Local index, live watcher, 1,000+ items</div>
                   </td>
                   <td className="py-4 px-6 font-semibold text-emerald-400 bg-amber-500/5 flex items-center gap-1.5">
                     <Check className="w-4 h-4 text-emerald-400" />
-                    <span>Built-In Sibling Scanner</span>
+                    <span>Built-In SQLite Library</span>
+                  </td>
+                  <td className="py-4 px-6 text-rose-400 flex items-center gap-1.5">
+                    <X className="w-4 h-4 text-rose-400" />
+                    <span>Manual / external scraper</span>
+                  </td>
+                  <td className="py-4 px-6 text-neutral-400">Folder listing only</td>
+                </tr>
+
+                <tr>
+                  <td className="py-4 px-6 font-medium text-white">
+                    <div>Smart TV Series &amp; Episode Auto-Detection</div>
+                    <div className="text-xs text-neutral-500">Automatic series grouping &amp; specials order</div>
+                  </td>
+                  <td className="py-4 px-6 font-semibold text-emerald-400 bg-amber-500/5 flex items-center gap-1.5">
+                    <Check className="w-4 h-4 text-emerald-400" />
+                    <span>Auto Series &amp; Sibling Scanner</span>
                   </td>
                   <td className="py-4 px-6 text-rose-400 flex items-center gap-1.5">
                     <X className="w-4 h-4 text-rose-400" />
@@ -281,18 +299,44 @@ export function ArchitectureComparison() {
 
                 <tr>
                   <td className="py-4 px-6 font-medium text-white">
-                    <div>Cinema &amp; Anime Visual Profiles</div>
-                    <div className="text-xs text-neutral-500">Yellow subtitles &amp; dynamic loudnorm EQ</div>
+                    <div>Playback Profiles &amp; Theming</div>
+                    <div className="text-xs text-neutral-500">Genre presets, design skins, subtitle styling</div>
                   </td>
                   <td className="py-4 px-6 font-semibold text-emerald-400 bg-amber-500/5 flex items-center gap-1.5">
                     <Check className="w-4 h-4 text-emerald-400" />
-                    <span>1-Click Studio Profiles</span>
+                    <span>9 Profiles • 12 Skins</span>
                   </td>
                   <td className="py-4 px-6 text-rose-400 flex items-center gap-1.5">
                     <X className="w-4 h-4 text-rose-400" />
-                    <span>None</span>
+                    <span>Basic theme only</span>
                   </td>
                   <td className="py-4 px-6 text-neutral-400">Complex manual filter menus</td>
+                </tr>
+
+                <tr>
+                  <td className="py-4 px-6 font-medium text-white">
+                    <div>Network Streams &amp; Diagnostics</div>
+                    <div className="text-xs text-neutral-500">Direct URLs, F9 stats, screenshots, chapters</div>
+                  </td>
+                  <td className="py-4 px-6 font-semibold text-emerald-400 bg-amber-500/5 flex items-center gap-1.5">
+                    <Check className="w-4 h-4 text-emerald-400" />
+                    <span>HLS / RTSP / RTMP + F9 Overlay</span>
+                  </td>
+                  <td className="py-4 px-6 text-amber-400">Varies by app</td>
+                  <td className="py-4 px-6 text-neutral-400">Supported, dated UI</td>
+                </tr>
+
+                <tr>
+                  <td className="py-4 px-6 font-medium text-white">
+                    <div>Updates</div>
+                    <div className="text-xs text-neutral-500">How new versions reach you</div>
+                  </td>
+                  <td className="py-4 px-6 font-semibold text-emerald-400 bg-amber-500/5 flex items-center gap-1.5">
+                    <Check className="w-4 h-4 text-emerald-400" />
+                    <span>Signed In-App Auto-Update</span>
+                  </td>
+                  <td className="py-4 px-6 text-neutral-400">Manual downloads</td>
+                  <td className="py-4 px-6 text-neutral-400">Manual downloads</td>
                 </tr>
 
                 <tr>
@@ -332,6 +376,12 @@ export function ArchitectureComparison() {
                 legacy: "Dated Win32 legacy skins",
               },
               {
+                title: "Self-Organizing Media Library",
+                eytaa: "SQLite index + live watcher",
+                electron: "Manual / external scraper",
+                legacy: "Folder listing only",
+              },
+              {
                 title: "TV Series Sibling Detection",
                 eytaa: "Auto Sibling Scanner (1-click)",
                 electron: "Manual playlists",
@@ -342,6 +392,18 @@ export function ArchitectureComparison() {
                 eytaa: "Quick-Hash <0.1ms (Preserves state)",
                 electron: "Loses progress",
                 legacy: "Loses progress",
+              },
+              {
+                title: "Profiles & Theming",
+                eytaa: "9 profiles • 12 complete skins",
+                electron: "Basic theme only",
+                legacy: "Manual filter menus",
+              },
+              {
+                title: "Network Streams",
+                eytaa: "HLS / RTSP / RTMP + F9 stats",
+                electron: "Varies by app",
+                legacy: "Supported, dated UI",
               },
             ].map((item, i) => (
               <div key={i} className="p-4 rounded-xl bg-white/[0.03] border border-white/5 space-y-2.5">

@@ -9,9 +9,9 @@ import { GithubIcon } from "@/components/GithubIcon";
 
 const NAV_ITEMS = [
   { id: "interactive-demo", label: "Live Demo", href: "/#interactive-demo" },
+  { id: "media-center", label: "Media Center", href: "/#media-center" },
   { id: "architecture", label: "Why EYTAA", href: "/#architecture" },
   { id: "features", label: "Features", href: "/#features" },
-  { id: "shortcuts", label: "Shortcuts", href: "/#shortcuts" },
   { id: "changelog", label: "Changelog", href: "/#changelog" },
 ];
 
@@ -38,7 +38,7 @@ export function Navbar() {
         return;
       }
 
-      const sectionIds = ["interactive-demo", "architecture", "features", "shortcuts", "changelog", "download"];
+      const sectionIds = ["interactive-demo", "media-center", "architecture", "features", "shortcuts", "changelog", "download"];
       const scrollPosition = window.scrollY + 200;
 
       for (let i = sectionIds.length - 1; i >= 0; i--) {
@@ -119,7 +119,7 @@ export function Navbar() {
                   EYTAA
                 </span>
                 <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/5 text-neutral-400 border border-white/10">
-                  v0.2.0
+                  v0.2.5
                 </span>
               </div>
               <span className="text-[10px] sm:text-[11px] text-neutral-400 font-medium tracking-wide">

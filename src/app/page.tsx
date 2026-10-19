@@ -2,6 +2,7 @@ import React from "react";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { InteractivePlayerDemo } from "@/components/InteractivePlayerDemo";
+import { SmartMediaCenter } from "@/components/SmartMediaCenter";
 import { ArchitectureComparison } from "@/components/ArchitectureComparison";
 import { FeaturesGrid } from "@/components/FeaturesGrid";
 import { ShortcutsCheatSheet } from "@/components/ShortcutsCheatSheet";
@@ -21,6 +22,9 @@ export default function Home() {
 
         {/* Live Interactive Player Simulator */}
         <InteractivePlayerDemo />
+
+        {/* Smart Media Center */}
+        <SmartMediaCenter />
 
         {/* Architecture & Performance Breakdown */}
         <ArchitectureComparison />

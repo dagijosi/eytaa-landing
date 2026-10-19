@@ -31,8 +31,8 @@ export async function GET() {
 
       return NextResponse.json({
         success: true,
-        version: data.tag_name || "v0.2.0",
-        name: data.name || "EYTAA v0.2.0",
+        version: data.tag_name || "v0.2.5",
+        name: data.name || "EYTAA v0.2.5",
         publishedAt: data.published_at,
         exe: exe
           ? {
@@ -61,24 +61,24 @@ export async function GET() {
   // Fallback data
   return NextResponse.json({
     success: true,
-    version: "v0.2.0",
-    name: "EYTAA v0.2.0",
-    publishedAt: "2026-10-15T18:00:00Z",
+    version: "v0.2.5",
+    name: "EYTAA v0.2.5",
+    publishedAt: "2026-10-17T15:45:17Z",
     exe: {
-      name: "EYTAA_0.2.0_x64-setup.exe",
-      sizeBytes: 35019413,
-      sizeMb: "33.4",
+      name: "EYTAA_0.2.5_x64-setup.exe",
+      sizeBytes: 35163586,
+      sizeMb: "33.5",
       downloadUrl: "/api/download?type=exe",
       directUrl:
-        "https://github.com/dagijosi/Eytaa/releases/download/v0.2.0/EYTAA_0.2.0_x64-setup.exe",
+        "https://github.com/dagijosi/Eytaa/releases/download/v0.2.5/EYTAA_0.2.5_x64-setup.exe",
     },
     msi: {
-      name: "EYTAA_0.2.0_x64_en-US.msi",
-      sizeBytes: 46723072,
-      sizeMb: "44.6",
+      name: "EYTAA_0.2.5_x64_en-US.msi",
+      sizeBytes: 46903296,
+      sizeMb: "44.7",
       downloadUrl: "/api/download?type=msi",
       directUrl:
-        "https://github.com/dagijosi/Eytaa/releases/download/v0.2.0/EYTAA_0.2.0_x64_en-US.msi",
+        "https://github.com/dagijosi/Eytaa/releases/download/v0.2.5/EYTAA_0.2.5_x64_en-US.msi",
     },
   });
 }

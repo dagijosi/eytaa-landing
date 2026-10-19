@@ -2,7 +2,7 @@
 
 import React from "react";
 import { track } from "@vercel/analytics";
-import { Download, Cpu, Zap, Database, ArrowRight, Play, CheckCircle2, FolderSync } from "lucide-react";
+import { Download, Cpu, Zap, Database, ArrowRight, Play, CheckCircle2, LayoutGrid } from "lucide-react";
 
 export function Hero() {
   return (
@@ -14,7 +14,7 @@ export function Hero() {
         {/* Release Pill Badge */}
         <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full chip text-xs mb-8 sm:mb-10">
           <span className="flex h-2 w-2 rounded-full bg-amber-400" />
-          <span className="font-semibold tracking-wide text-neutral-200">Free &amp; open source &middot; v0.2.0</span>
+          <span className="font-semibold tracking-wide text-neutral-200">Free &amp; open source &middot; v0.2.5</span>
           <span className="text-neutral-600" aria-hidden="true">|</span>
           <span className="text-neutral-400 font-mono">እይታ &middot; Vision</span>
         </div>
@@ -30,7 +30,8 @@ export function Hero() {
           A free media player for{" "}
           <strong className="text-white font-semibold">Windows 10 &amp; 11</strong> that plays
           almost anything — 4K HDR, MKV, anime, lectures — while using less memory than a browser
-          tab. Drop in a file or a whole season folder and it just works.
+          tab. Drop in a file or a whole season folder and EYTAA indexes it, groups it, and keeps
+          your place.
         </p>
 
         {/* Technical footnote — for enthusiasts who want the details */}
@@ -111,11 +112,11 @@ export function Hero() {
 
           <div className="surface p-4 sm:p-5 rounded-2xl text-left hover:border-amber-500/30 transition-colors">
             <div className="flex items-center gap-2 text-amber-400 mb-1.5">
-              <FolderSync className="w-4 h-4" />
-              <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-400">Folder scan</span>
+              <LayoutGrid className="w-4 h-4" />
+              <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-400">Smart library</span>
             </div>
-            <div className="text-2xl sm:text-3xl font-black text-white font-mono">&lt; 0.1 ms</div>
-            <div className="text-xs text-neutral-400 mt-1 leading-snug">Rename files without losing progress</div>
+            <div className="text-2xl sm:text-3xl font-black text-white font-mono">1,000+ items</div>
+            <div className="text-xs text-neutral-400 mt-1 leading-snug">Series, seasons &amp; episodes auto-grouped</div>
           </div>
 
           <div className="surface p-4 sm:p-5 rounded-2xl text-left hover:border-amber-500/30 transition-colors">
