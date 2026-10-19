@@ -121,7 +121,7 @@ export function ArchitectureComparison() {
                     Tauri 2 Core • Capabilities Scoping • Win32 Event Loops
                   </div>
                   <div className="text-xs text-neutral-400 mt-1">
-                    Single-instance lock, file pickers, global media keys, PiP snap
+                    Single-instance lock, file pickers, 22 rebindable keys, global combos
                   </div>
                 </div>
                 <span className="text-xs font-mono text-neutral-300 font-bold bg-white/5 border border-white/10 px-2.5 py-1 rounded">

@@ -6,35 +6,51 @@ import { Keyboard, Search } from "lucide-react";
 interface ShortcutItem {
   keys: string[];
   action: string;
-  category: "playback" | "audio" | "window" | "system";
+  category: "playback" | "seeking" | "volume" | "view" | "tools" | "system";
   scope: "In-App" | "System-Wide";
 }
 
 const SHORTCUTS: ShortcutItem[] = [
-  { keys: ["Space"], action: "Toggle Play / Pause", category: "playback", scope: "In-App" },
-  { keys: ["←"], action: "Seek backward 5 seconds", category: "playback", scope: "In-App" },
-  { keys: ["→"], action: "Seek forward 5 seconds", category: "playback", scope: "In-App" },
-  { keys: ["Shift", "←"], action: "Seek backward 30 seconds", category: "playback", scope: "In-App" },
-  { keys: ["Shift", "→"], action: "Seek forward 30 seconds", category: "playback", scope: "In-App" },
-  { keys: ["↑"], action: "Increase volume (+5%)", category: "audio", scope: "In-App" },
-  { keys: ["↓"], action: "Decrease volume (-5%)", category: "audio", scope: "In-App" },
-  { keys: ["M"], action: "Toggle Mute", category: "audio", scope: "In-App" },
-  { keys: ["F"], action: "Toggle Fullscreen (or Double-Click)", category: "window", scope: "In-App" },
-  { keys: ["P"], action: "Toggle Picture-in-Picture (PiP) mode", category: "window", scope: "In-App" },
-  { keys: ["O"], action: "Open File dialog via native picker", category: "playback", scope: "In-App" },
-  { keys: ["L"], action: "Toggle Slide-Out Playlist drawer", category: "playback", scope: "In-App" },
-  { keys: ["S"], action: "Toggle Modular Settings center", category: "window", scope: "In-App" },
-  { keys: ["T"], action: "Toggle Sleep Timer modal", category: "playback", scope: "In-App" },
-  { keys: ["N"], action: "Toggle Night Listening loudnorm mode", category: "audio", scope: "In-App" },
-  { keys: ["C"], action: "Cycle Playback Profile (Anime, Cinema, Balanced)", category: "playback", scope: "In-App" },
-  { keys: ["V"], action: "Cycle Video Fit Mode (Fit, Fill, Stretch)", category: "window", scope: "In-App" },
-  { keys: ["["], action: "Decrease playback speed by 0.1x", category: "playback", scope: "In-App" },
-  { keys: ["]"], action: "Increase playback speed by 0.1x", category: "playback", scope: "In-App" },
+  { keys: ["Space", "K"], action: "Toggle Play / Pause", category: "playback", scope: "In-App" },
+  { keys: ["["], action: "Decrease playback speed by 0.25x", category: "playback", scope: "In-App" },
+  { keys: ["]"], action: "Increase playback speed by 0.25x", category: "playback", scope: "In-App" },
   { keys: ["Backspace"], action: "Reset playback speed to 1.0x", category: "playback", scope: "In-App" },
-  { keys: ["MediaPlayPause"], action: "Global hardware key play/pause", category: "system", scope: "System-Wide" },
-  { keys: ["MediaTrackNext"], action: "Global hardware next track", category: "system", scope: "System-Wide" },
-  { keys: ["MediaTrackPrevious"], action: "Global hardware previous track", category: "system", scope: "System-Wide" },
+  { keys: ["←", "→"], action: "Seek backward / forward 10 seconds", category: "seeking", scope: "In-App" },
+  { keys: ["Shift", "←", "→"], action: "Seek 30 seconds (hold Shift)", category: "seeking", scope: "In-App" },
+  { keys: ["↑", "↓"], action: "Volume up / down by 5%", category: "volume", scope: "In-App" },
+  { keys: ["M"], action: "Mute / unmute", category: "volume", scope: "In-App" },
+  { keys: ["F", "Enter"], action: "Toggle fullscreen", category: "view", scope: "In-App" },
+  { keys: ["I"], action: "Toggle Picture-in-Picture (PiP)", category: "view", scope: "In-App" },
+  { keys: ["P"], action: "Toggle the playlist drawer", category: "view", scope: "In-App" },
+  { keys: ["B"], action: "Toggle the media library", category: "view", scope: "In-App" },
+  { keys: ["Esc"], action: "Close menus, drawers and PiP (fixed, not rebindable)", category: "view", scope: "In-App" },
+  { keys: ["S"], action: "Cycle subtitle track", category: "tools", scope: "In-App" },
+  { keys: ["A"], action: "Cycle audio track", category: "tools", scope: "In-App" },
+  { keys: ["R"], action: "Cycle repeat mode", category: "tools", scope: "In-App" },
+  { keys: ["O"], action: "Open a file with the native picker", category: "tools", scope: "In-App" },
+  { keys: ["U"], action: "Open a network stream (URL dialog)", category: "tools", scope: "In-App" },
+  { keys: ["E"], action: "Save the current frame as a screenshot", category: "tools", scope: "In-App" },
+  { keys: ["F7"], action: "Cycle playback profile", category: "tools", scope: "In-App" },
+  { keys: ["F8"], action: "Toggle night listening", category: "tools", scope: "In-App" },
+  { keys: ["F9"], action: "Toggle the playback stats overlay", category: "tools", scope: "In-App" },
+  { keys: ["MediaPlayPause", "MediaStop"], action: "Global hardware play / pause", category: "system", scope: "System-Wide" },
+  { keys: ["MediaTrackNext", "MediaTrackPrevious"], action: "Global hardware next / previous track", category: "system", scope: "System-Wide" },
+  { keys: ["Ctrl", "Alt", "Space"], action: "Global play / pause combo", category: "system", scope: "System-Wide" },
+  { keys: ["Ctrl", "Alt", "←", "→"], action: "Global previous / next track combo", category: "system", scope: "System-Wide" },
+  { keys: ["Ctrl", "Alt", "↑", "↓"], action: "Global volume up / down combo", category: "system", scope: "System-Wide" },
+  { keys: ["Ctrl", "Alt", "M"], action: "Global mute combo", category: "system", scope: "System-Wide" },
 ];
+
+const KEY_LABELS: Record<string, string> = {
+  MediaPlayPause: "Media Play",
+  MediaStop: "Media Stop",
+  MediaTrackNext: "Media Next",
+  MediaTrackPrevious: "Media Prev",
+};
+
+function keyLabel(key: string): string {
+  return KEY_LABELS[key] ?? key;
+}
 
 export function ShortcutsCheatSheet() {
   const [filterQuery, setFilterQuery] = useState("");
@@ -61,8 +77,9 @@ export function ShortcutsCheatSheet() {
             Control everything from the keyboard
           </h2>
           <p className="mt-4 text-neutral-300 text-sm sm:text-base leading-relaxed">
-            Play, seek, change profiles, and move the window without reaching for the mouse &mdash;
-            plus your Windows media keys control EYTAA even when it&apos;s not focused.
+            Play, seek, cycle tracks, capture a frame, or open a stream without touching the mouse.
+            Every in-app binding can be rebound from Settings &rarr; Shortcuts, and global combos
+            keep working while EYTAA is in the background.
           </p>
         </div>
 
@@ -72,8 +89,10 @@ export function ShortcutsCheatSheet() {
             {[
               { id: "all", label: "All shortcuts" },
               { id: "playback", label: "Playback" },
-              { id: "audio", label: "Audio & EQ" },
-              { id: "window", label: "Window & PiP" },
+              { id: "seeking", label: "Seeking" },
+              { id: "volume", label: "Volume" },
+              { id: "view", label: "View" },
+              { id: "tools", label: "Tools" },
               { id: "system", label: "System-wide" },
             ].map((cat) => (
               <button
@@ -136,16 +155,33 @@ export function ShortcutsCheatSheet() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-1.5 flex-shrink-0">
+                <div className="flex items-center gap-1.5 flex-shrink-0 flex-wrap justify-end">
                   {item.keys.map((k, kIdx) => (
-                    <kbd key={kIdx} className="keycap text-xs">
-                      {k}
+                    <kbd key={kIdx} className="keycap text-xs whitespace-nowrap">
+                      {keyLabel(k)}
                     </kbd>
                   ))}
                 </div>
               </div>
             );
           })}
+        </div>
+
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5">
+            <div className="text-xs font-bold text-white mb-1">Scroll wheel volume</div>
+            <p className="text-[11px] text-neutral-400 leading-relaxed">
+              Hover the video and scroll to adjust volume by 3% per notch. Toggle it in Settings
+              &rarr; Shortcuts.
+            </p>
+          </div>
+          <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5">
+            <div className="text-xs font-bold text-white mb-1">Rebind anything</div>
+            <p className="text-[11px] text-neutral-400 leading-relaxed">
+              Assign a new key to any in-app action. Esc stays fixed so you can always close PiP,
+              menus and drawers. Global combos live in Advanced mode.
+            </p>
+          </div>
         </div>
 
         {filteredShortcuts.length === 0 && (

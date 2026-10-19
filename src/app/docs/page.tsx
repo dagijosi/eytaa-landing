@@ -230,7 +230,7 @@ export default function DocsPage() {
                   <p>
                     Nine built-in profiles tune picture, audio, speed, and subtitles together.
                     Cycle them with hotkey{" "}
-                    <kbd className="px-2 py-0.5 rounded bg-neutral-800 border border-white/10 font-mono text-xs">C</kbd>:
+                    <kbd className="px-2 py-0.5 rounded bg-neutral-800 border border-white/10 font-mono text-xs">F7</kbd>:
                   </p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="p-4 rounded-xl surface border-white/10">
@@ -274,8 +274,14 @@ export default function DocsPage() {
                   <span>Keybindings</span>
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-                  5. Essential Hotkeys Reference
+                  5. Keyboard Shortcuts &amp; Global Combos
                 </h2>
+                <p className="mt-4 text-neutral-300 text-sm leading-relaxed">
+                  Every in-app binding is rebindable from Settings &rarr; Shortcuts. These are the
+                  defaults; <kbd className="px-1.5 py-0.5 rounded bg-neutral-800 border border-white/10 font-mono text-xs">Esc</kbd>{" "}
+                  stays fixed so overlays can always be closed. Global shortcuts are opt-in from
+                  Advanced mode.
+                </p>
                 <div className="mt-4 overflow-x-auto">
                   <table className="w-full text-left text-xs border-collapse">
                     <thead>
@@ -287,13 +293,13 @@ export default function DocsPage() {
                     </thead>
                     <tbody className="divide-y divide-white/5 font-mono text-neutral-300">
                       <tr>
-                        <td className="py-2 px-4 font-bold text-amber-400">Space</td>
+                        <td className="py-2 px-4 font-bold text-amber-400">Space / K</td>
                         <td className="py-2 px-4 font-sans text-white">Toggle Play / Pause</td>
                         <td className="py-2 px-4 text-neutral-500">In-App</td>
                       </tr>
                       <tr>
                         <td className="py-2 px-4 font-bold text-amber-400">&larr; / &rarr;</td>
-                        <td className="py-2 px-4 font-sans text-white">Seek 5s backward / forward</td>
+                        <td className="py-2 px-4 font-sans text-white">Seek 10s backward / forward</td>
                         <td className="py-2 px-4 text-neutral-500">In-App</td>
                       </tr>
                       <tr>
@@ -302,28 +308,77 @@ export default function DocsPage() {
                         <td className="py-2 px-4 text-neutral-500">In-App</td>
                       </tr>
                       <tr>
-                        <td className="py-2 px-4 font-bold text-amber-400">&uarr; / &darr;</td>
-                        <td className="py-2 px-4 font-sans text-white">Volume +5% / -5%</td>
+                        <td className="py-2 px-4 font-bold text-amber-400">&uarr; / &darr; / M</td>
+                        <td className="py-2 px-4 font-sans text-white">Volume +5% / -5% / mute</td>
                         <td className="py-2 px-4 text-neutral-500">In-App</td>
                       </tr>
                       <tr>
-                        <td className="py-2 px-4 font-bold text-amber-400">P</td>
-                        <td className="py-2 px-4 font-sans text-white">Toggle Picture-in-Picture (PiP)</td>
+                        <td className="py-2 px-4 font-bold text-amber-400">[ / ] / Backspace</td>
+                        <td className="py-2 px-4 font-sans text-white">Speed -0.25x / +0.25x / reset to 1.0x</td>
                         <td className="py-2 px-4 text-neutral-500">In-App</td>
                       </tr>
                       <tr>
-                        <td className="py-2 px-4 font-bold text-amber-400">C</td>
-                        <td className="py-2 px-4 font-sans text-white">Cycle Playback Profile (Anime, Cinema, Balanced)</td>
+                        <td className="py-2 px-4 font-bold text-amber-400">F / Enter</td>
+                        <td className="py-2 px-4 font-sans text-white">Toggle fullscreen</td>
                         <td className="py-2 px-4 text-neutral-500">In-App</td>
                       </tr>
                       <tr>
-                        <td className="py-2 px-4 font-bold text-amber-400">MediaPlayPause</td>
-                        <td className="py-2 px-4 font-sans text-white">Global hardware media key Play/Pause</td>
+                        <td className="py-2 px-4 font-bold text-amber-400">I / P / B</td>
+                        <td className="py-2 px-4 font-sans text-white">PiP / playlist drawer / media library</td>
+                        <td className="py-2 px-4 text-neutral-500">In-App</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 px-4 font-bold text-amber-400">S / A / R</td>
+                        <td className="py-2 px-4 font-sans text-white">Cycle subtitle / audio track / repeat mode</td>
+                        <td className="py-2 px-4 text-neutral-500">In-App</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 px-4 font-bold text-amber-400">O / U</td>
+                        <td className="py-2 px-4 font-sans text-white">Open file / open network stream</td>
+                        <td className="py-2 px-4 text-neutral-500">In-App</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 px-4 font-bold text-amber-400">E / F9</td>
+                        <td className="py-2 px-4 font-sans text-white">Save screenshot / playback stats overlay</td>
+                        <td className="py-2 px-4 text-neutral-500">In-App</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 px-4 font-bold text-amber-400">F7 / F8</td>
+                        <td className="py-2 px-4 font-sans text-white">Cycle playback profile / night listening</td>
+                        <td className="py-2 px-4 text-neutral-500">In-App</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 px-4 font-bold text-amber-400">Esc</td>
+                        <td className="py-2 px-4 font-sans text-white">Close menus, drawers and PiP (fixed)</td>
+                        <td className="py-2 px-4 text-neutral-500">In-App</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 px-4 font-bold text-amber-400">Media keys</td>
+                        <td className="py-2 px-4 font-sans text-white">Play/pause, next, previous, stop</td>
+                        <td className="py-2 px-4 text-neutral-300 font-semibold">System-Wide</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 px-4 font-bold text-amber-400">Ctrl + Alt + Space</td>
+                        <td className="py-2 px-4 font-sans text-white">Global play / pause combo</td>
+                        <td className="py-2 px-4 text-neutral-300 font-semibold">System-Wide</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 px-4 font-bold text-amber-400">Ctrl + Alt + arrows</td>
+                        <td className="py-2 px-4 font-sans text-white">Previous / next track or volume up / down</td>
+                        <td className="py-2 px-4 text-neutral-300 font-semibold">System-Wide</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 px-4 font-bold text-amber-400">Ctrl + Alt + M</td>
+                        <td className="py-2 px-4 font-sans text-white">Global mute</td>
                         <td className="py-2 px-4 text-neutral-300 font-semibold">System-Wide</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
+                <p className="mt-3 text-[11px] text-neutral-500">
+                  Mouse: hover the video and scroll to change volume by 3% per notch. The behaviour
+                  can be disabled in Settings &rarr; Shortcuts.
+                </p>
               </section>
 
               {/* SECTION: Building From Source */}

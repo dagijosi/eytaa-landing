@@ -93,7 +93,7 @@ const FEATURES = [
     title: "Every key is your key",
     badge: "Rebindable",
     description:
-      "Rebind every action in Settings, or control playback with Windows media keys while EYTAA is in the background. Nothing is locked to someone else's defaults.",
+      "Rebind all 22 in-app actions, or keep using your keyboard while EYTAA sits in the background: media keys and Ctrl+Alt combos handle play, seek, volume and mute. Nothing is locked to someone else's defaults.",
   },
   {
     icon: Cpu,
