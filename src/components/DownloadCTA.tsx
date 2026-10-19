@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { track } from "@vercel/analytics";
 import {
   Download,
@@ -12,39 +12,13 @@ import {
   Check,
   FileDown,
 } from "lucide-react";
-
-interface ReleaseInfo {
-  version: string;
-  name: string;
-  exe: {
-    name: string;
-    sizeMb: string;
-    downloadUrl: string;
-    directUrl: string;
-  };
-  msi: {
-    name: string;
-    sizeMb: string;
-    downloadUrl: string;
-    directUrl: string;
-  };
-}
+import { FALLBACK_VERSION } from "@/lib/release";
+import { useReleaseInfo } from "@/lib/useReleaseInfo";
 
 export function DownloadCTA() {
   const [copiedCmd, setCopiedCmd] = useState(false);
-  const [release, setRelease] = useState<ReleaseInfo | null>(null);
   const [downloadStarted, setDownloadStarted] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetch("/api/release-info")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          setRelease(data);
-        }
-      })
-      .catch(() => {});
-  }, []);
+  const release = useReleaseInfo();
 
   const cloneCommand = `git clone https://github.com/dagijosi/Eytaa.git\ncd Eytaa/player\nnpm install\nnpm run setup:lib\nnpm run tauri:dev`;
 
@@ -60,9 +34,9 @@ export function DownloadCTA() {
     setTimeout(() => setDownloadStarted(null), 6000);
   };
 
-  const exeSize = release?.exe?.sizeMb || "33.5";
-  const msiSize = release?.msi?.sizeMb || "44.7";
-  const version = release?.version || "v0.2.5";
+  const exeSize = release?.exe?.sizeMb;
+  const msiSize = release?.msi?.sizeMb;
+  const version = release?.version ?? FALLBACK_VERSION;
 
   return (
     <section id="download" className="py-24 relative">
@@ -129,7 +103,9 @@ export function DownloadCTA() {
                   </div>
                   <div className="text-xs text-black/80 mt-1 font-medium flex items-center justify-between">
                     <span>Direct Standalone Installer</span>
-                    <span className="font-mono font-bold">~{exeSize} MB</span>
+                    <span className="font-mono font-bold">
+                      {exeSize ? `~${exeSize} MB` : "Latest build"}
+                    </span>
                   </div>
                 </a>
 
@@ -154,7 +130,9 @@ export function DownloadCTA() {
                   </div>
                   <div className="text-xs text-neutral-400 mt-1 flex items-center justify-between">
                     <span>Windows Installer Package</span>
-                    <span className="font-mono font-bold text-neutral-300">~{msiSize} MB</span>
+                    <span className="font-mono font-bold text-neutral-300">
+                      {msiSize ? `~${msiSize} MB` : "Latest build"}
+                    </span>
                   </div>
                 </a>
               </div>

@@ -1,4 +1,7 @@
 import { NextResponse } from "next/server";
+import { FALLBACK_VERSION } from "@/lib/release";
+
+const FALLBACK_BARE_VERSION = FALLBACK_VERSION.replace(/^v/, "");
 
 interface GithubAsset {
   name: string;
@@ -15,7 +18,7 @@ export async function GET() {
           Accept: "application/vnd.github+json",
           "User-Agent": "Eytaa-Landing",
         },
-        next: { revalidate: 1800 },
+        next: { revalidate: 300 },
       }
     );
 
@@ -31,8 +34,8 @@ export async function GET() {
 
       return NextResponse.json({
         success: true,
-        version: data.tag_name || "v0.2.5",
-        name: data.name || "EYTAA v0.2.5",
+        version: data.tag_name || FALLBACK_VERSION,
+        name: data.name || `EYTAA ${FALLBACK_VERSION}`,
         publishedAt: data.published_at,
         exe: exe
           ? {
@@ -61,24 +64,22 @@ export async function GET() {
   // Fallback data
   return NextResponse.json({
     success: true,
-    version: "v0.2.5",
-    name: "EYTAA v0.2.5",
+    version: FALLBACK_VERSION,
+    name: `EYTAA ${FALLBACK_VERSION}`,
     publishedAt: "2026-10-17T15:45:17Z",
     exe: {
-      name: "EYTAA_0.2.5_x64-setup.exe",
+      name: `EYTAA_${FALLBACK_BARE_VERSION}_x64-setup.exe`,
       sizeBytes: 35163586,
       sizeMb: "33.5",
       downloadUrl: "/api/download?type=exe",
-      directUrl:
-        "https://github.com/dagijosi/Eytaa/releases/download/v0.2.5/EYTAA_0.2.5_x64-setup.exe",
+      directUrl: `https://github.com/dagijosi/Eytaa/releases/download/${FALLBACK_VERSION}/EYTAA_${FALLBACK_BARE_VERSION}_x64-setup.exe`,
     },
     msi: {
-      name: "EYTAA_0.2.5_x64_en-US.msi",
+      name: `EYTAA_${FALLBACK_BARE_VERSION}_x64_en-US.msi`,
       sizeBytes: 46903296,
       sizeMb: "44.7",
       downloadUrl: "/api/download?type=msi",
-      directUrl:
-        "https://github.com/dagijosi/Eytaa/releases/download/v0.2.5/EYTAA_0.2.5_x64_en-US.msi",
+      directUrl: `https://github.com/dagijosi/Eytaa/releases/download/${FALLBACK_VERSION}/EYTAA_${FALLBACK_BARE_VERSION}_x64_en-US.msi`,
     },
   });
 }

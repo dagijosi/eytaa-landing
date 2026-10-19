@@ -1,4 +1,7 @@
 import { NextResponse } from "next/server";
+import { FALLBACK_VERSION } from "@/lib/release";
+
+const FALLBACK_BARE_VERSION = FALLBACK_VERSION.replace(/^v/, "");
 
 interface GithubAsset {
   id: number;
@@ -78,8 +81,8 @@ export async function GET() {
     releases: [
       {
         id: 1,
-        tag: "v0.2.5",
-        name: "EYTAA v0.2.5",
+        tag: FALLBACK_VERSION,
+        name: `EYTAA ${FALLBACK_VERSION}`,
         publishedAt: "2026-10-17T15:45:17Z",
         body: "### Deep Theming & Playback Profiles\n- 12 curated design skins with full accent and glass control\n- 9 built-in playback profiles, including Late Night, HDR Vivid Pop, Action & Blockbuster, and Vintage Cinema\n- In-place profile customizer with live player preview\n- Advanced subtitle typography: fonts, colors, outlines, shadows, and margins",
         isLatest: true,
@@ -87,18 +90,18 @@ export async function GET() {
         assets: [
           {
             id: 101,
-            name: "EYTAA_0.2.5_x64-setup.exe",
+            name: `EYTAA_${FALLBACK_BARE_VERSION}_x64-setup.exe`,
             sizeFormatted: "33.5 MB",
-            proxyDownloadUrl: "/api/download?tag=v0.2.5&type=exe",
-            directUrl: "https://github.com/dagijosi/Eytaa/releases/download/v0.2.5/EYTAA_0.2.5_x64-setup.exe",
+            proxyDownloadUrl: `/api/download?tag=${FALLBACK_VERSION}&type=exe`,
+            directUrl: `https://github.com/dagijosi/Eytaa/releases/download/${FALLBACK_VERSION}/EYTAA_${FALLBACK_BARE_VERSION}_x64-setup.exe`,
             type: "exe",
           },
           {
             id: 102,
-            name: "EYTAA_0.2.5_x64_en-US.msi",
+            name: `EYTAA_${FALLBACK_BARE_VERSION}_x64_en-US.msi`,
             sizeFormatted: "44.7 MB",
-            proxyDownloadUrl: "/api/download?tag=v0.2.5&type=msi",
-            directUrl: "https://github.com/dagijosi/Eytaa/releases/download/v0.2.5/EYTAA_0.2.5_x64_en-US.msi",
+            proxyDownloadUrl: `/api/download?tag=${FALLBACK_VERSION}&type=msi`,
+            directUrl: `https://github.com/dagijosi/Eytaa/releases/download/${FALLBACK_VERSION}/EYTAA_${FALLBACK_BARE_VERSION}_x64_en-US.msi`,
             type: "msi",
           },
         ],

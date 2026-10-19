@@ -113,15 +113,16 @@ export function InteractivePlayerDemo() {
         <div className="text-center max-w-3xl mx-auto mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full chip text-neutral-400 text-xs font-semibold uppercase tracking-wider mb-3">
             <Radio className="w-3.5 h-3.5 text-amber-400" />
-            <span>Try it now &mdash; no download</span>
+            <span>Interactive UI preview &mdash; no download</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
-            Click around the real player
+            See the interface before you install
           </h2>
           <p className="mt-4 text-neutral-300 text-sm sm:text-base leading-relaxed">
-            This is a working preview of EYTAA&apos;s interface. Play and pause, drag the timeline,
-            switch between movie playback, your TV-series library, and picture-in-picture, then
-            change the picture and audio profile to see exactly what it does.
+            This is an interactive mockup of EYTAA&apos;s interface, not the desktop app itself.
+            Play and pause, drag the timeline, browse a simulated series library, and switch profiles
+            to see how the controls feel. Real playback, your own files, and the native libmpv engine
+            are in the download.
           </p>
 
           {/* Mode Switcher Tabs */}
@@ -229,10 +230,10 @@ export function InteractivePlayerDemo() {
               </div>
             </div>
 
-            {/* Center: HWND Direct3D11 Live Indicator */}
+            {/* Center: Preview Indicator */}
             <div className="hidden sm:flex items-center gap-2 text-[10px] font-mono text-neutral-300 bg-white/5 border border-white/10 px-2 py-0.5 rounded-full">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-              <span>D3D11va Zero-Copy • 60 FPS</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+              <span>UI Preview &bull; Simulated</span>
             </div>
 
             {/* Right: Windows Window Controls & Snap Grid */}
@@ -679,24 +680,34 @@ export function InteractivePlayerDemo() {
           <div className="bg-[#141416] border-t border-white/10 px-4 py-2.5 flex flex-wrap items-center justify-between text-xs text-neutral-400">
             <div className="flex items-center gap-4">
               <span className="flex items-center gap-1.5 text-neutral-300">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                <span>libmpv engine status: <strong>READY (Embedded)</strong></span>
+                <CheckCircle2 className="w-3.5 h-3.5 text-neutral-400" />
+                <span>Simulated UI &mdash; no media is decoded</span>
               </span>
               <span className="hidden sm:inline text-neutral-600">|</span>
               <span className="hidden sm:inline">
-                Profile: <strong className="text-amber-400">{currentProfile.name}</strong>
+                Profile preview: <strong className="text-amber-400">{currentProfile.name}</strong>
               </span>
             </div>
 
             <div className="flex items-center gap-3">
               <span className="font-mono text-[11px] text-neutral-400">
-                Subtitles: <strong style={{ color: currentProfile.subtitleColor }}>libass</strong>
+                Subtitles: <strong style={{ color: currentProfile.subtitleColor }}>style preview</strong>
               </span>
               <span className="font-mono text-[11px] text-neutral-300">
-                Audio: {currentProfile.audioFilter}
+                Visuals: CSS filter preview
               </span>
             </div>
           </div>
+        </div>
+
+        <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 text-xs text-neutral-400">
+          <span>Want the real thing?</span>
+          <a
+            href="#download"
+            className="font-semibold text-amber-300 hover:text-amber-200 transition-colors"
+          >
+            Download EYTAA for Windows &rarr;
+          </a>
         </div>
       </div>
     </section>

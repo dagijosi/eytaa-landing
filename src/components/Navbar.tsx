@@ -6,9 +6,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Download, Menu, X, BookOpen } from "lucide-react";
 import { GithubIcon } from "@/components/GithubIcon";
+import { useLatestVersion } from "@/lib/useReleaseInfo";
 
 const NAV_ITEMS = [
-  { id: "interactive-demo", label: "Live Demo", href: "/#interactive-demo" },
+  { id: "interactive-demo", label: "UI Preview", href: "/#interactive-demo" },
   { id: "media-center", label: "Media Center", href: "/#media-center" },
   { id: "architecture", label: "Why EYTAA", href: "/#architecture" },
   { id: "features", label: "Features", href: "/#features" },
@@ -23,6 +24,7 @@ export function Navbar() {
   const [activeSection, setActiveSection] = useState<string>("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(72);
+  const version = useLatestVersion();
 
   // ScrollSpy for landing page sections
   useEffect(() => {
@@ -119,7 +121,7 @@ export function Navbar() {
                   EYTAA
                 </span>
                 <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/5 text-neutral-400 border border-white/10">
-                  v0.2.5
+                  {version}
                 </span>
               </div>
               <span className="text-[10px] sm:text-[11px] text-neutral-400 font-medium tracking-wide">

@@ -5,8 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUp } from "lucide-react";
 import { GithubIcon } from "@/components/GithubIcon";
+import { useLatestVersion } from "@/lib/useReleaseInfo";
 
 export function Footer() {
+  const version = useLatestVersion();
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -62,7 +65,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/#interactive-demo" className="hover:text-amber-400 transition-colors">
-                  Interactive Demo
+                  Interactive Preview
                 </Link>
               </li>
               <li>
@@ -82,7 +85,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/#changelog" className="hover:text-amber-400 transition-colors">
-                  Changelog (v0.2.5)
+                  Changelog ({version})
                 </Link>
               </li>
             </ul>

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { FALLBACK_VERSION } from "@/lib/release";
 
 interface GithubAsset {
   name: string;
@@ -65,7 +66,7 @@ export async function GET(request: NextRequest) {
 
   // Fallback direct URL if GitHub API was unreachable or rate-limited
   if (!targetUrl) {
-    const fallbackTag = tag || "v0.2.5";
+    const fallbackTag = tag || FALLBACK_VERSION;
     if (type === "msi") {
       targetUrl = `https://github.com/dagijosi/Eytaa/releases/download/${fallbackTag}/EYTAA_${fallbackTag.replace("v","")}_x64_en-US.msi`;
       filename = `EYTAA_${fallbackTag.replace("v","")}_x64_en-US.msi`;

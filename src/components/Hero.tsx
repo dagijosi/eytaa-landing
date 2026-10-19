@@ -3,8 +3,11 @@
 import React from "react";
 import { track } from "@vercel/analytics";
 import { Download, Cpu, Zap, Database, ArrowRight, Play, CheckCircle2, LayoutGrid } from "lucide-react";
+import { useLatestVersion } from "@/lib/useReleaseInfo";
 
 export function Hero() {
+  const version = useLatestVersion();
+
   return (
     <section
       id="hero-section"
@@ -14,7 +17,9 @@ export function Hero() {
         {/* Release Pill Badge */}
         <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full chip text-xs mb-8 sm:mb-10">
           <span className="flex h-2 w-2 rounded-full bg-amber-400" />
-          <span className="font-semibold tracking-wide text-neutral-200">Free to download &middot; v0.2.5</span>
+          <span className="font-semibold tracking-wide text-neutral-200">
+            Free to download &middot; {version}
+          </span>
           <span className="text-neutral-600" aria-hidden="true">|</span>
           <span className="text-neutral-400 font-mono">እይታ &middot; Vision</span>
         </div>
@@ -67,7 +72,7 @@ export function Hero() {
             className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-6 py-4 rounded-2xl font-semibold text-sm text-neutral-200 surface hover:bg-white/10 hover:border-white/20 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
           >
             <Play className="w-4 h-4 text-amber-400 fill-amber-400" />
-            <span>Try the player demo</span>
+            <span>Explore the interface</span>
             <ArrowRight className="w-4 h-4 text-neutral-400" />
           </a>
         </div>
