@@ -88,7 +88,7 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Architecture & Open Source */}
+          {/* Architecture & Stack */}
           <div className="md:col-span-3 space-y-3">
             <div className="text-xs font-bold uppercase tracking-wider text-white">Technology</div>
             <ul className="space-y-1.5 text-neutral-400">

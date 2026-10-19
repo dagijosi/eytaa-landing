@@ -14,7 +14,7 @@ export function Hero() {
         {/* Release Pill Badge */}
         <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full chip text-xs mb-8 sm:mb-10">
           <span className="flex h-2 w-2 rounded-full bg-amber-400" />
-          <span className="font-semibold tracking-wide text-neutral-200">Free &amp; open source &middot; v0.2.5</span>
+          <span className="font-semibold tracking-wide text-neutral-200">Free to download &middot; v0.2.5</span>
           <span className="text-neutral-600" aria-hidden="true">|</span>
           <span className="text-neutral-400 font-mono">እይታ &middot; Vision</span>
         </div>
@@ -30,8 +30,8 @@ export function Hero() {
           A free media player for{" "}
           <strong className="text-white font-semibold">Windows 10 &amp; 11</strong> that plays
           almost anything — 4K HDR, MKV, anime, lectures — while using less memory than a browser
-          tab. Drop in a file or a whole season folder and EYTAA indexes it, groups it, and keeps
-          your place.
+          tab. Add your media folders once and EYTAA indexes them, groups shows, and keeps your
+          place. Drop in a single file to start watching instantly.
         </p>
 
         {/* Technical footnote — for enthusiasts who want the details */}

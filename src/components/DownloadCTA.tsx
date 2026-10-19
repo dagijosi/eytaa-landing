@@ -163,7 +163,7 @@ export function DownloadCTA() {
               <div className="mt-8 pt-8 border-t border-white/10 flex flex-wrap items-center gap-6 text-xs text-neutral-400">
                 <span className="flex items-center gap-1.5">
                   <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                  <span>Signed releases</span>
+                  <span>Signed auto-updates</span>
                 </span>
                 <span className="flex items-center gap-1.5">
                   <CheckCircle2 className="w-4 h-4 text-neutral-300" />
@@ -171,7 +171,7 @@ export function DownloadCTA() {
                 </span>
                 <span className="flex items-center gap-1.5">
                   <CheckCircle2 className="w-4 h-4 text-amber-400" />
-                  <span>Open source (LGPL v2.1+)</span>
+                  <span>libmpv (LGPL v2.1+)</span>
                 </span>
               </div>
 
@@ -214,7 +214,7 @@ export function DownloadCTA() {
                       3
                     </span>
                     <div>
-                      <strong className="text-white">Enjoy studio-grade viewing</strong>: Drop any video, MKV, or season folder to start watching instantly.
+                      <strong className="text-white">Enjoy studio-grade viewing</strong>: Drop any video or MKV to start instantly, or add a folder to your library.
                     </div>
                   </div>
                 </div>

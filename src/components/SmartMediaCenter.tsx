@@ -188,7 +188,7 @@ export function SmartMediaCenter() {
               <span aria-hidden="true">•</span>
               <span>No cloud index</span>
               <span aria-hidden="true">•</span>
-              <span>No manual playlists</span>
+              <span>No manual sorting</span>
             </div>
           </div>
         </div>

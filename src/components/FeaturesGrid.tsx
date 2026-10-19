@@ -15,6 +15,9 @@ import {
   Fingerprint,
   PanelsTopLeft,
   ListChecks,
+  MonitorSpeaker,
+  Files,
+  ListMusic,
 } from "lucide-react";
 
 const FEATURES = [
@@ -94,6 +97,27 @@ const FEATURES = [
     badge: "Rebindable",
     description:
       "Rebind all 22 in-app actions, or keep using your keyboard while EYTAA sits in the background: media keys and Ctrl+Alt combos handle play, seek, volume and mute. Nothing is locked to someone else's defaults.",
+  },
+  {
+    icon: MonitorSpeaker,
+    title: "Windows knows what's playing",
+    badge: "Now Playing",
+    description:
+      "Title, artwork and transport controls appear in the Windows media flyout, taskbar preview and lock screen. Play, pause, skip and seek from the system UI, even when EYTAA is behind other windows.",
+  },
+  {
+    icon: Files,
+    title: "Drop it where you want it",
+    badge: "Two-Zone Drop",
+    description:
+      "Drop files on the left half to play them now, or on the right half to queue them without interrupting playback. Dropping a subtitle file attaches it to the current video.",
+  },
+  {
+    icon: ListMusic,
+    title: "A queue that remembers",
+    badge: "Queue + Playlists",
+    description:
+      "Switch between the live queue and saved playlists, drag rows to reorder, auto-play the next episode, and choose repeat off, all, or one. Chapter-aware navigation handles the rest.",
   },
   {
     icon: Cpu,

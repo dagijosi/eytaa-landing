@@ -328,6 +328,21 @@ export function ArchitectureComparison() {
 
                 <tr>
                   <td className="py-4 px-6 font-medium text-white">
+                    <div>Windows Integration</div>
+                    <div className="text-xs text-neutral-500">
+                      Now Playing, file associations, media keys
+                    </div>
+                  </td>
+                  <td className="py-4 px-6 font-semibold text-emerald-400 bg-amber-500/5 flex items-center gap-1.5">
+                    <Check className="w-4 h-4 text-emerald-400" />
+                    <span>SMTC + 15 File Types</span>
+                  </td>
+                  <td className="py-4 px-6 text-amber-400">Varies by app</td>
+                  <td className="py-4 px-6 text-neutral-400">Basic OS hooks</td>
+                </tr>
+
+                <tr>
+                  <td className="py-4 px-6 font-medium text-white">
                     <div>Updates</div>
                     <div className="text-xs text-neutral-500">How new versions reach you</div>
                   </td>
@@ -404,6 +419,12 @@ export function ArchitectureComparison() {
                 eytaa: "HLS / RTSP / RTMP + F9 stats",
                 electron: "Varies by app",
                 legacy: "Supported, dated UI",
+              },
+              {
+                title: "Windows Integration",
+                eytaa: "SMTC + 15 file associations",
+                electron: "Varies by app",
+                legacy: "Basic OS hooks",
               },
             ].map((item, i) => (
               <div key={i} className="p-4 rounded-xl bg-white/[0.03] border border-white/5 space-y-2.5">
