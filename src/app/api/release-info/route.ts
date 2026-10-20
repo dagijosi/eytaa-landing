@@ -31,6 +31,9 @@ export async function GET() {
       const msi = assets.find((a: GithubAsset) =>
         a.name.toLowerCase().endsWith(".msi")
       );
+      const dmg = assets.find((a: GithubAsset) =>
+        a.name.toLowerCase().endsWith(".dmg")
+      );
 
       return NextResponse.json({
         success: true,
@@ -55,6 +58,15 @@ export async function GET() {
               directUrl: msi.browser_download_url,
             }
           : null,
+        dmg: dmg
+          ? {
+              name: dmg.name,
+              sizeBytes: dmg.size,
+              sizeMb: (dmg.size / (1024 * 1024)).toFixed(1),
+              downloadUrl: "/api/download?type=dmg",
+              directUrl: dmg.browser_download_url,
+            }
+          : null,
       });
     }
   } catch (err) {
@@ -66,20 +78,27 @@ export async function GET() {
     success: true,
     version: FALLBACK_VERSION,
     name: `EYTAA ${FALLBACK_VERSION}`,
-    publishedAt: "2026-10-17T15:45:17Z",
+    publishedAt: "2026-10-20T14:08:55Z",
     exe: {
       name: `EYTAA_${FALLBACK_BARE_VERSION}_x64-setup.exe`,
-      sizeBytes: 35163586,
-      sizeMb: "33.5",
+      sizeBytes: 35183786,
+      sizeMb: "33.6",
       downloadUrl: "/api/download?type=exe",
       directUrl: `https://github.com/dagijosi/Eytaa/releases/download/${FALLBACK_VERSION}/EYTAA_${FALLBACK_BARE_VERSION}_x64-setup.exe`,
     },
     msi: {
       name: `EYTAA_${FALLBACK_BARE_VERSION}_x64_en-US.msi`,
-      sizeBytes: 46903296,
-      sizeMb: "44.7",
+      sizeBytes: 46923776,
+      sizeMb: "44.8",
       downloadUrl: "/api/download?type=msi",
       directUrl: `https://github.com/dagijosi/Eytaa/releases/download/${FALLBACK_VERSION}/EYTAA_${FALLBACK_BARE_VERSION}_x64_en-US.msi`,
+    },
+    dmg: {
+      name: `EYTAA_${FALLBACK_BARE_VERSION}_aarch64.dmg`,
+      sizeBytes: 32516387,
+      sizeMb: "31.0",
+      downloadUrl: "/api/download?type=dmg",
+      directUrl: `https://github.com/dagijosi/Eytaa/releases/download/${FALLBACK_VERSION}/EYTAA_${FALLBACK_BARE_VERSION}_aarch64.dmg`,
     },
   });
 }

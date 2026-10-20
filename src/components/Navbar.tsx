@@ -125,7 +125,7 @@ export function Navbar() {
                 </span>
               </div>
               <span className="text-[10px] sm:text-[11px] text-neutral-400 font-medium tracking-wide">
-                Vistara Player • Windows
+                Vistara Player • Desktop
               </span>
             </div>
           </Link>

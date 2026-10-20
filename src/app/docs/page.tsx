@@ -19,7 +19,7 @@ import {
 
 const DOCS_TITLE = "Documentation & Release Archive — EYTAA Player";
 const DOCS_DESCRIPTION =
-  "Comprehensive guides, system architecture, keyboard shortcuts, build instructions, and dynamic release downloads for EYTAA Player on Windows.";
+  "Comprehensive guides, system architecture, keyboard shortcuts, build instructions, and dynamic release downloads for EYTAA Player on Windows and Apple Silicon macOS.";
 
 export const metadata: Metadata = {
   title: DOCS_TITLE,
@@ -72,9 +72,9 @@ export default function DocsPage() {
                 EYTAA Documentation &amp; Version Archive
               </h1>
               <p className="mt-2 text-sm text-neutral-400 max-w-2xl leading-relaxed">
-                EYTAA is a free, fast, and private media player for Windows 10 &amp; 11. This page
-                explains what it does, how to install it, how to build it from source, and where to
-                download any past release.
+                EYTAA is a free, fast, and private media player for Windows 10 &amp; 11, with an
+                Apple Silicon macOS build. This page explains what it does, how to install it, how
+                to build it from source, and where to download any past release.
               </p>
             </div>
 
@@ -126,6 +126,11 @@ export default function DocsPage() {
                       UI Pipeline: React 19 + Tailwind v4 &rarr; WebView2 Transparent Overlay (60–144+ FPS)
                     </div>
                   </div>
+                  <p className="text-xs text-neutral-400">
+                    The HWND zero-copy path above is Windows-specific. The macOS build ships as a
+                    self-contained <code>.app</code> with libmpv, FFmpeg, and their Homebrew
+                    dependencies bundled inside the application.
+                  </p>
                 </div>
               </section>
 
@@ -146,7 +151,8 @@ export default function DocsPage() {
                       </div>
                       <ul className="space-y-1 text-xs text-neutral-300 list-disc list-inside">
                         <li>Windows 10 (1903+) or Windows 11 (64-bit)</li>
-                        <li>DirectX 11 compatible GPU (Intel, NVIDIA, AMD)</li>
+                        <li>macOS 15+ on Apple Silicon (arm64)</li>
+                        <li>DirectX 11 compatible GPU (Windows)</li>
                         <li>40 MB available RAM (idle)</li>
                         <li>150 MB disk space</li>
                       </ul>
@@ -165,15 +171,26 @@ export default function DocsPage() {
                           <strong>.MSI Enterprise Package</strong>: System-level silent deployment for
                           enterprises and network distribution.
                         </li>
+                        <li>
+                          <strong>.DMG for macOS</strong>: Apple Silicon build for macOS 15+; drag
+                          EYTAA into Applications.
+                        </li>
                       </ul>
                     </div>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-xs text-amber-200">
-                    <strong>Antivirus / SmartScreen Note</strong>: Because EYTAA is dynamically linked
-                    with LGPL <code>libmpv-2.dll</code> and cryptographic updater manifests, Windows
-                    SmartScreen or real-time scanners may show an initial prompt on first execution.
-                    Select <em>&ldquo;More Info &rarr; Run Anyway&rdquo;</em>.
+                  <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-xs text-amber-200 space-y-2">
+                    <p>
+                      <strong>Antivirus / SmartScreen Note</strong>: Because EYTAA is dynamically
+                      linked with LGPL <code>libmpv-2.dll</code> and cryptographic updater manifests,
+                      Windows SmartScreen or real-time scanners may show an initial prompt on first
+                      execution. Select <em>&ldquo;More Info &rarr; Run Anyway&rdquo;</em>.
+                    </p>
+                    <p>
+                      <strong>macOS Gatekeeper Note</strong>: The current macOS build is unsigned and
+                      not notarized. On first launch, right-click the EYTAA app and choose{" "}
+                      <em>Open</em>.
+                    </p>
                   </div>
                 </div>
               </section>
@@ -417,10 +434,18 @@ export default function DocsPage() {
                   <span>Developer Build</span>
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-                  6. Building From Source on Windows
+                  6. Building From Source
                 </h2>
                 <div className="mt-4 text-neutral-300 text-sm leading-relaxed space-y-4">
-                  <p>Prerequisites: Node.js 20+, Rust 1.77+, Visual Studio C++ Build Tools.</p>
+                  <p>
+                    <strong>Windows prerequisites:</strong> Node.js 20+, Rust 1.77+, Visual Studio
+                    C++ Build Tools.
+                  </p>
+                  <p>
+                    <strong>macOS prerequisites:</strong> Node.js 20+, Rust stable with the{" "}
+                    <code>aarch64-apple-darwin</code> target, Xcode Command Line Tools, and{" "}
+                    <code>brew install mpv ffmpeg dylibbundler</code>.
+                  </p>
                   <pre className="p-4 rounded-xl bg-[#0e0e10] border border-white/10 font-mono text-xs text-neutral-300 overflow-x-auto leading-relaxed">
                     <code>{`# 1. Clone the repository
 git clone https://github.com/dagijosi/Eytaa.git
@@ -429,7 +454,7 @@ cd Eytaa/player
 # 2. Install dependencies
 npm install
 
-# 3. Download architecture-matched libmpv DLLs
+# 3. Download architecture-matched libmpv binaries
 npm run setup:lib
 
 # 4. Launch complete Tauri desktop app with live libmpv
@@ -437,6 +462,12 @@ npm run tauri:dev
 
 # 5. Build production Windows installer
 npm run tauri:build`}</code>
+                  </pre>
+                  <pre className="p-4 rounded-xl bg-[#0e0e10] border border-white/10 font-mono text-xs text-neutral-300 overflow-x-auto leading-relaxed">
+                    <code>{`# macOS (Apple Silicon) production .app / .dmg
+brew install mpv ffmpeg dylibbundler
+npm run setup:lib
+npm run tauri:build -- --target aarch64-apple-darwin`}</code>
                   </pre>
                 </div>
               </section>

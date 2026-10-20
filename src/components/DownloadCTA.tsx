@@ -11,6 +11,7 @@ import {
   Copy,
   Check,
   FileDown,
+  Apple,
 } from "lucide-react";
 import { FALLBACK_VERSION } from "@/lib/release";
 import { useReleaseInfo } from "@/lib/useReleaseInfo";
@@ -28,7 +29,7 @@ export function DownloadCTA() {
     setTimeout(() => setCopiedCmd(false), 2000);
   };
 
-  const triggerDownload = (type: "exe" | "msi", filename: string) => {
+  const triggerDownload = (type: "exe" | "msi" | "dmg", filename: string) => {
     track("Download", { type, location: "download-section" });
     setDownloadStarted(filename);
     setTimeout(() => setDownloadStarted(null), 6000);
@@ -36,7 +37,9 @@ export function DownloadCTA() {
 
   const exeSize = release?.exe?.sizeMb;
   const msiSize = release?.msi?.sizeMb;
+  const dmgSize = release?.dmg?.sizeMb;
   const version = release?.version ?? FALLBACK_VERSION;
+  const macAvailable = Boolean(release?.dmg);
 
   return (
     <section id="download" className="py-24 relative">
@@ -67,17 +70,24 @@ export function DownloadCTA() {
             <div className="lg:col-span-7">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold uppercase tracking-wider mb-4">
                 <Monitor className="w-3.5 h-3.5 text-amber-400" />
-                <span>Windows 10 & 11 • 64-bit • Direct Download</span>
+                <span>
+                  {macAvailable
+                    ? "Windows 10 & 11 • macOS 15+ • Direct Download"
+                    : "Windows 10 & 11 • 64-bit • Direct Download"}
+                </span>
               </div>
 
               <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
-                Get EYTAA for Windows
+                {macAvailable ? "Get EYTAA for Windows & macOS" : "Get EYTAA for Windows"}
               </h2>
 
               <p className="mt-4 text-neutral-300 text-sm sm:text-base leading-relaxed">
-                Get the latest version ({version}) for Windows 10 &amp; 11, 64-bit. It&apos;s a
-                single installer file &mdash; no account, no sign-up, no extra downloads. Pick the
-                format that suits you below.
+                Get the latest version ({version}) for{" "}
+                {macAvailable
+                  ? "Windows 10 & 11, or Apple Silicon macOS 15 and newer"
+                  : "Windows 10 & 11, 64-bit"}
+                . No account, no sign-up, no extra downloads &mdash; pick the build that matches
+                your system below.
               </p>
 
               {/* Direct Download Options */}
@@ -135,13 +145,42 @@ export function DownloadCTA() {
                     </span>
                   </div>
                 </a>
+
+                {/* Option 3: macOS .DMG */}
+                {macAvailable && (
+                  <a
+                    href="/api/download?type=dmg"
+                    download
+                    onClick={() => triggerDownload("dmg", release?.dmg?.name ?? `EYTAA_${version}_aarch64.dmg`)}
+                    id="direct-download-dmg"
+                    className="group sm:col-span-2 p-5 rounded-2xl surface hover:bg-white/10 border-white/15 hover:border-white/30 text-white hover:-translate-y-1 transition-all duration-200 block"
+                  >
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
+                        <Apple className="w-5 h-5 text-neutral-300 group-hover:scale-110 transition-transform" />
+                      </div>
+                      <span className="text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded-full bg-white/5 text-neutral-300 border border-white/10">
+                        Apple Silicon
+                      </span>
+                    </div>
+                    <div className="text-lg font-black leading-tight text-white group-hover:text-amber-300 transition-colors">
+                      Download .DMG for macOS
+                    </div>
+                    <div className="text-xs text-neutral-400 mt-1 flex items-center justify-between">
+                      <span>macOS 15+ &middot; Apple Silicon (arm64)</span>
+                      <span className="font-mono font-bold text-neutral-300">
+                        {dmgSize ? `~${dmgSize} MB` : "Latest build"}
+                      </span>
+                    </div>
+                  </a>
+                )}
               </div>
 
               {/* Trust Badges */}
               <div className="mt-8 pt-8 border-t border-white/10 flex flex-wrap items-center gap-6 text-xs text-neutral-400">
                 <span className="flex items-center gap-1.5">
                   <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                  <span>Signed auto-updates</span>
+                  <span>Signed Windows auto-updates</span>
                 </span>
                 <span className="flex items-center gap-1.5">
                   <CheckCircle2 className="w-4 h-4 text-neutral-300" />
@@ -153,12 +192,19 @@ export function DownloadCTA() {
                 </span>
               </div>
 
-              {/* SmartScreen first-run hint */}
+              {/* First-run warnings */}
               <div className="mt-6 p-3.5 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-neutral-400 leading-relaxed">
                 <span className="text-neutral-200 font-semibold">First launch note:</span> Windows
                 SmartScreen may warn about a less-common app. Choose{" "}
                 <span className="text-amber-300 font-medium">More info &rarr; Run anyway</span> to
                 continue.
+                {macAvailable && (
+                  <>
+                    {" "}
+                    The macOS build is currently unsigned, so right-click the app and choose{" "}
+                    <span className="text-amber-300 font-medium">Open</span> the first time.
+                  </>
+                )}
               </div>
             </div>
 
@@ -176,7 +222,10 @@ export function DownloadCTA() {
                       1
                     </span>
                     <div>
-                      <strong className="text-white">Download the .EXE above</strong>: The direct file will save straight to your Downloads folder.
+                      <strong className="text-white">Download the installer above</strong>:{" "}
+                      {macAvailable
+                        ? "Choose .EXE or .MSI for Windows, or the .DMG for macOS."
+                        : "The direct file will save straight to your Downloads folder."}
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
@@ -184,7 +233,10 @@ export function DownloadCTA() {
                       2
                     </span>
                     <div>
-                      <strong className="text-white">Run the installer</strong>: Launch the setup wizard to create desktop shortcuts and associate video extensions.
+                      <strong className="text-white">Run the installer</strong>:{" "}
+                      {macAvailable
+                        ? "Complete the Windows setup wizard, or open the .DMG and drag EYTAA into Applications."
+                        : "Launch the setup wizard to create desktop shortcuts and associate video extensions."}
                     </div>
                   </div>
                   <div className="flex items-start gap-3">

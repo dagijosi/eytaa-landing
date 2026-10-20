@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Download, CheckCircle2, Clock, ShieldCheck, FileDown } from "lucide-react";
+import { Download, CheckCircle2, Clock, ShieldCheck, FileDown, Apple } from "lucide-react";
 
 interface ReleaseAsset {
   id: number;
@@ -9,7 +9,7 @@ interface ReleaseAsset {
   sizeFormatted: string;
   proxyDownloadUrl: string;
   directUrl: string;
-  type: "exe" | "msi" | "sig" | "json" | "other";
+  type: "exe" | "msi" | "dmg" | "sig" | "json" | "other";
 }
 
 interface ReleaseItem {
@@ -99,7 +99,10 @@ export function ReleaseArchive() {
         {releases.map((rel) => {
           const exeAsset = rel.assets.find((a) => a.type === "exe");
           const msiAsset = rel.assets.find((a) => a.type === "msi");
-          const otherAssets = rel.assets.filter((a) => a.type !== "exe" && a.type !== "msi");
+          const dmgAsset = rel.assets.find((a) => a.type === "dmg");
+          const otherAssets = rel.assets.filter(
+            (a) => a.type !== "exe" && a.type !== "msi" && a.type !== "dmg"
+          );
 
           return (
             <div
@@ -180,6 +183,30 @@ export function ReleaseArchive() {
                       </div>
                       <span className="font-mono text-[11px] bg-white/10 px-2 py-0.5 rounded text-neutral-300">
                         {msiAsset.sizeFormatted}
+                      </span>
+                    </a>
+                  )}
+
+                  {dmgAsset && (
+                    <a
+                      href={dmgAsset.proxyDownloadUrl}
+                      download
+                      onClick={() => handleDownload(dmgAsset.name)}
+                      className="sm:col-span-2 flex items-center justify-between p-3.5 rounded-xl surface hover:bg-white/10 text-white font-bold text-xs border-white/10 hover:border-white/20 hover:-translate-y-0.5 transition-all"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <Apple className="w-4 h-4 text-neutral-300" />
+                        <div>
+                          <div className="font-extrabold leading-none">
+                            Download .DMG for macOS
+                          </div>
+                          <div className="text-[10px] text-neutral-400 font-mono mt-0.5">
+                            {dmgAsset.name} &middot; Apple Silicon
+                          </div>
+                        </div>
+                      </div>
+                      <span className="font-mono text-[11px] bg-white/10 px-2 py-0.5 rounded text-neutral-300">
+                        {dmgAsset.sizeFormatted}
                       </span>
                     </a>
                   )}

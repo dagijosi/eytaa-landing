@@ -27,6 +27,7 @@ async function fetchReleaseInfo(): Promise<ReleaseInfo | null> {
           publishedAt: typeof data.publishedAt === "string" ? data.publishedAt : undefined,
           exe: data.exe ?? null,
           msi: data.msi ?? null,
+          dmg: data.dmg ?? null,
         };
 
         cachedRelease = release;

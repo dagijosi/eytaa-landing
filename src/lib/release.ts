@@ -1,4 +1,4 @@
-export const FALLBACK_VERSION = "v0.2.5";
+export const FALLBACK_VERSION = "v0.2.8";
 
 export interface ReleaseAssetInfo {
   name: string;
@@ -14,6 +14,7 @@ export interface ReleaseInfo {
   publishedAt?: string;
   exe: ReleaseAssetInfo | null;
   msi: ReleaseAssetInfo | null;
+  dmg: ReleaseAssetInfo | null;
 }
 
 export function normalizeVersion(value: unknown): string {

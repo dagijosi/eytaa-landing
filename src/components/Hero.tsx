@@ -2,11 +2,14 @@
 
 import React from "react";
 import { track } from "@vercel/analytics";
-import { Download, Cpu, Zap, Database, ArrowRight, Play, CheckCircle2, LayoutGrid } from "lucide-react";
-import { useLatestVersion } from "@/lib/useReleaseInfo";
+import { Download, Cpu, Zap, Database, ArrowRight, Play, CheckCircle2, LayoutGrid, Apple } from "lucide-react";
+import { FALLBACK_VERSION } from "@/lib/release";
+import { useReleaseInfo } from "@/lib/useReleaseInfo";
 
 export function Hero() {
-  const version = useLatestVersion();
+  const release = useReleaseInfo();
+  const version = release?.version ?? FALLBACK_VERSION;
+  const macAvailable = Boolean(release?.dmg);
 
   return (
     <section
@@ -66,6 +69,26 @@ export function Hero() {
             </div>
           </a>
 
+          {macAvailable && (
+            <a
+              href="/api/download?type=dmg"
+              download
+              onClick={() => track("Download", { type: "dmg", location: "hero" })}
+              id="hero-download-macos-cta"
+              className="w-full sm:w-auto group flex items-center justify-center gap-3 px-6 py-4 rounded-2xl font-semibold text-sm text-neutral-200 surface hover:bg-white/10 hover:border-white/20 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+            >
+              <Apple className="w-5 h-5 text-neutral-300 group-hover:scale-110 transition-transform" />
+              <div className="text-left">
+                <div className="text-base font-extrabold leading-tight text-white">
+                  Download for macOS
+                </div>
+                <div className="text-[10px] font-bold uppercase tracking-wider text-neutral-400 leading-none mt-0.5">
+                  Apple Silicon .dmg &middot; macOS 15+
+                </div>
+              </div>
+            </a>
+          )}
+
           <a
             href="#interactive-demo"
             id="hero-demo-cta"
@@ -81,7 +104,7 @@ export function Hero() {
         <div className="mt-6 flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 text-xs text-neutral-400">
           <span className="flex items-center gap-1.5">
             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-            <span>Windows 10 &amp; 11</span>
+            <span>{macAvailable ? "Windows 10 & 11 · macOS 15+" : "Windows 10 & 11"}</span>
           </span>
           <span className="text-neutral-700" aria-hidden="true">•</span>
           <span className="flex items-center gap-1.5">
