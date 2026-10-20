@@ -1,4 +1,4 @@
-export const FALLBACK_VERSION = "v0.2.8";
+export const FALLBACK_VERSION = "v0.2.9";
 
 export interface ReleaseAssetInfo {
   name: string;
