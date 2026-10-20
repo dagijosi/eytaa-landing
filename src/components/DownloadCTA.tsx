@@ -15,10 +15,12 @@ import {
 } from "lucide-react";
 import { FALLBACK_VERSION } from "@/lib/release";
 import { useReleaseInfo } from "@/lib/useReleaseInfo";
+import { MacInstallGuideModal } from "@/components/MacInstallGuideModal";
 
 export function DownloadCTA() {
   const [copiedCmd, setCopiedCmd] = useState(false);
   const [downloadStarted, setDownloadStarted] = useState<string | null>(null);
+  const [showMacGuide, setShowMacGuide] = useState(false);
   const release = useReleaseInfo();
 
   const cloneCommand = `git clone https://github.com/dagijosi/Eytaa.git\ncd Eytaa/player\nnpm install\nnpm run setup:lib\nnpm run tauri:dev`;
@@ -193,17 +195,26 @@ export function DownloadCTA() {
               </div>
 
               {/* First-run warnings */}
-              <div className="mt-6 p-3.5 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-neutral-400 leading-relaxed">
-                <span className="text-neutral-200 font-semibold">First launch note:</span> Windows
-                SmartScreen may warn about a less-common app. Choose{" "}
-                <span className="text-amber-300 font-medium">More info &rarr; Run anyway</span> to
-                continue.
+              <div className="mt-6 p-4 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-neutral-400 leading-relaxed space-y-2">
+                <div>
+                  <span className="text-neutral-200 font-semibold">Windows SmartScreen:</span> Choose{" "}
+                  <span className="text-amber-300 font-medium">More info &rarr; Run anyway</span> on first launch.
+                </div>
                 {macAvailable && (
-                  <>
-                    {" "}
-                    The macOS build is currently unsigned, so right-click the app and choose{" "}
-                    <span className="text-amber-300 font-medium">Open</span> the first time.
-                  </>
+                  <div className="pt-2 border-t border-white/10 flex flex-wrap items-center justify-between gap-2">
+                    <div>
+                      <span className="text-neutral-200 font-semibold">macOS Gatekeeper:</span> If macOS says &ldquo;is damaged and can&rsquo;t be opened&rdquo;, simply run{" "}
+                      <code className="text-amber-300 font-mono bg-black/40 px-1.5 py-0.5 rounded border border-white/10">xattr -cr /Applications/EYTAA.app</code>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setShowMacGuide(true)}
+                      id="cta-open-mac-guide"
+                      className="text-amber-400 hover:text-amber-300 font-bold underline transition-colors"
+                    >
+                      View 5-Second Mac Guide &rarr;
+                    </button>
+                  </div>
                 )}
               </div>
             </div>
@@ -283,6 +294,11 @@ export function DownloadCTA() {
           </div>
         </div>
       </div>
+
+      <MacInstallGuideModal
+        isOpen={showMacGuide}
+        onClose={() => setShowMacGuide(false)}
+      />
     </section>
   );
 }

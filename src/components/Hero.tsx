@@ -1,12 +1,14 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { track } from "@vercel/analytics";
-import { Download, Cpu, Zap, Database, ArrowRight, Play, CheckCircle2, LayoutGrid, Apple } from "lucide-react";
+import { Download, Cpu, Zap, Database, ArrowRight, Play, CheckCircle2, LayoutGrid, Apple, HelpCircle } from "lucide-react";
 import { FALLBACK_VERSION } from "@/lib/release";
 import { useReleaseInfo } from "@/lib/useReleaseInfo";
+import { MacInstallGuideModal } from "@/components/MacInstallGuideModal";
 
 export function Hero() {
+  const [showMacGuide, setShowMacGuide] = useState(false);
   const release = useReleaseInfo();
   const version = release?.version ?? FALLBACK_VERSION;
   const macAvailable = Boolean(release?.dmg);
@@ -100,6 +102,21 @@ export function Hero() {
           </a>
         </div>
 
+        {/* macOS First-time Quick Help Trigger */}
+        {macAvailable && (
+          <div className="mt-3">
+            <button
+              type="button"
+              onClick={() => setShowMacGuide(true)}
+              id="hero-mac-guide-trigger"
+              className="inline-flex items-center gap-1.5 text-xs text-amber-400/90 hover:text-amber-300 font-medium transition-colors hover:underline"
+            >
+              <HelpCircle className="w-3.5 h-3.5" />
+              <span>First time on Mac? See 5-second launch note (&ldquo;damaged&rdquo; fix) &rarr;</span>
+            </button>
+          </div>
+        )}
+
         {/* Verification & Trust Pills */}
         <div className="mt-6 flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 text-xs text-neutral-400">
           <span className="flex items-center gap-1.5">
@@ -157,6 +174,11 @@ export function Hero() {
           </div>
         </div>
       </div>
+
+      <MacInstallGuideModal
+        isOpen={showMacGuide}
+        onClose={() => setShowMacGuide(false)}
+      />
     </section>
   );
 }

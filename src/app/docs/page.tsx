@@ -181,16 +181,58 @@ export default function DocsPage() {
 
                   <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-xs text-amber-200 space-y-2">
                     <p>
-                      <strong>Antivirus / SmartScreen Note</strong>: Because EYTAA is dynamically
+                      <strong>Windows SmartScreen Note</strong>: Because EYTAA is dynamically
                       linked with LGPL <code>libmpv-2.dll</code> and cryptographic updater manifests,
                       Windows SmartScreen or real-time scanners may show an initial prompt on first
                       execution. Select <em>&ldquo;More Info &rarr; Run Anyway&rdquo;</em>.
                     </p>
-                    <p>
-                      <strong>macOS Gatekeeper Note</strong>: The current macOS build is unsigned and
-                      not notarized. On first launch, right-click the EYTAA app and choose{" "}
-                      <em>Open</em>.
-                    </p>
+                  </div>
+
+                  {/* Dedicated macOS Gatekeeper Guide Card */}
+                  <div className="p-5 rounded-2xl surface border-white/15 space-y-4">
+                    <div className="flex items-center gap-2 text-white font-bold text-sm sm:text-base">
+                      <span className="w-2.5 h-2.5 rounded-full bg-amber-400" />
+                      <span>macOS Security: &ldquo;EYTAA is damaged and can&rsquo;t be opened&rdquo;</span>
+                    </div>
+
+                    <div className="text-xs text-neutral-300 leading-relaxed space-y-2">
+                      <p>
+                        <strong>Why this occurs:</strong> The app is not actually damaged. When you download a DMG from GitHub or a browser, macOS automatically attaches a security flag called <code>com.apple.quarantine</code>. Because this release is an open-source build not signed with an Apple Developer ID certificate ($99/year), macOS Gatekeeper blocks execution with this generic warning message.
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+                      {/* Option A */}
+                      <div className="p-4 rounded-xl bg-black/40 border border-white/10 space-y-2">
+                        <div className="text-xs font-bold text-emerald-400 flex items-center justify-between">
+                          <span>Option A: 5-Second Terminal Command</span>
+                          <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Fastest</span>
+                        </div>
+                        <p className="text-[11px] text-neutral-400">
+                          After dragging EYTAA into <code>/Applications</code>, open Terminal and run:
+                        </p>
+                        <div className="p-2.5 rounded-lg bg-[#0a0a0c] border border-white/10 font-mono text-xs text-amber-300 select-all overflow-x-auto">
+                          xattr -cr /Applications/EYTAA.app
+                        </div>
+                        <p className="text-[10px] text-neutral-500">
+                          This clears the quarantine attribute. EYTAA will now launch on normal double-click.
+                        </p>
+                      </div>
+
+                      {/* Option B */}
+                      <div className="p-4 rounded-xl bg-black/40 border border-white/10 space-y-2">
+                        <div className="text-xs font-bold text-neutral-200">
+                          Option B: macOS System Settings
+                        </div>
+                        <ol className="text-[11px] text-neutral-400 space-y-1 list-decimal list-inside pl-0.5">
+                          <li>Open <strong className="text-neutral-200">System Settings</strong> on your Mac.</li>
+                          <li>Go to <strong className="text-neutral-200">Privacy &amp; Security</strong>.</li>
+                          <li>Scroll to the <strong className="text-neutral-200">Security</strong> section.</li>
+                          <li>Click <strong className="text-amber-300 font-semibold">Open Anyway</strong> next to the EYTAA notice.</li>
+                          <li>Confirm your Mac password or Touch ID.</li>
+                        </ol>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </section>
